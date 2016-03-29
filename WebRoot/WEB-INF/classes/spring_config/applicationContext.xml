@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<context:annotation-config/>
+	<!-- 配置需要交给spring扫描管理的包,一般是包括整个项目的java文件的父包（由context提供） -->
+	<context:component-scan base-package="com.zq" />
+	<!-- ============================== 数据库配置 ==================================== -->
+	<!-- 数据源配置 -->
+	<bean name="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/test</value>
+			<!-- <value>jdbc:oracle:thin:@localhost:1521:orcl</value> -->
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>root</value>
+		</property>
+		
+	</bean>
+<!-- 	================================ MyBatis SqlSession配置 ========================================= -->
+	<!-- 使用SqlSessionFactoryBean工厂产生SqlSession对象，方便后期注入Dao -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis_config/Configuration.xml"></property>
+		<!--  <property name="plugins">
+             <list>
+                 <bean
+                     class="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
+                    <property name="dialectClass"
+                         value="com.github.miemiedev.mybatis.paginator.dialect.OracleDialect"></property>
+                 </bean>
+            </list>
+            </property> -->
+	</bean>
+
+<!-- Mapper接口所在包名，Spring会自动查找其下的Mapper -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.zq.system.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="oracleSequenceMaxValueIncrementer"  
+    class="org.springframework.jdbc.support.incrementer.OracleSequenceMaxValueIncrementer">  
+    <property name="incrementerName" value=""></property>  
+    <property name="dataSource" ref="dataSource"></property>  
+	</bean> 
+	
+	
+	<!-- ================================= 事务控制相关 ============================================= -->
+   	<bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">   
+    	<property name="dataSource" ref="dataSource"></property>
+ 	</bean>   
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="delete*" propagation="REQUIRED" read-only="false" 
+			           rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException"/>
+			<tx:method name="insert*" propagation="REQUIRED" read-only="false" 
+			           rollback-for="java.lang.RuntimeException" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false" 
+			           rollback-for="java.lang.Exception" />
+			
+			<tx:method name="find*" propagation="SUPPORTS"/>
+			<tx:method name="get*" propagation="SUPPORTS"/>
+			<tx:method name="select*" propagation="SUPPORTS"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<!-- 配置切入点 -->
+		<aop:pointcut id="transaction_pointcut"
+			expression="execution(* com.zq..service..*.*(..))" />
+		<!-- 应用该声明式事务规则 -->
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="transaction_pointcut" />
+	</aop:config>
+	
+    
+       
+</beans>
