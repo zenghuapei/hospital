@@ -66,6 +66,7 @@ public class UserInfoController  extends BaseController{
 		JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[]{"yyyy-MM-dd","yyyy-MM-dd HH:mm:ss"}));
 		UserInfo userinfo = (UserInfo) JSONObject.toBean(JSONObject.fromObject(data), UserInfo.class);
 		userinfo.setUserType(1);
+		userinfo.setUserName(userinfo.getAccount());
 		userInfoService.insertUserInfo(userinfo);
 		return "注册成功";
 	}
