@@ -1,0 +1,121 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : mysql
+Source Server Version : 50540
+Source Host           : localhost:3306
+Source Database       : test
+
+Target Server Type    : MYSQL
+Target Server Version : 50540
+File Encoding         : 65001
+
+Date: 2016-03-29 22:14:33
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for booking
+-- ----------------------------
+DROP TABLE IF EXISTS `booking`;
+CREATE TABLE `booking` (
+  `booking_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '预约信息ID',
+  `booking_state` varchar(20) DEFAULT NULL COMMENT '预约状态',
+  `booking_time` datetime DEFAULT NULL COMMENT '出诊时间',
+  `booknow` datetime DEFAULT NULL COMMENT '挂号时间',
+  `doctor_id` int(11) DEFAULT NULL COMMENT '医生ID',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户ID',
+  PRIMARY KEY (`booking_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of booking
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for doctor_info
+-- ----------------------------
+DROP TABLE IF EXISTS `doctor_info`;
+CREATE TABLE `doctor_info` (
+  `doctor_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '医生ID',
+  `doctor_brief` varchar(2000) NOT NULL COMMENT '简介',
+  `doctor_code` varchar(12) DEFAULT NULL COMMENT '医生编号',
+  `doctor_name` varchar(20) DEFAULT NULL COMMENT '医生姓名',
+  `doctor_pic` varchar(200) DEFAULT NULL COMMENT '医生照片',
+  `doctor_post` varchar(10) DEFAULT NULL COMMENT '职称',
+  `doctor_sex` varchar(10) DEFAULT NULL COMMENT '医生性别',
+  `doctor_specialty` varchar(30) DEFAULT NULL COMMENT '专业名称',
+  `doctor_type` varchar(10) DEFAULT NULL COMMENT '医生类别',
+  `doctor_xl` varchar(30) DEFAULT NULL COMMENT '学历',
+  `doctor_years` int(5) DEFAULT NULL COMMENT '从医年数',
+  `email` varchar(30) DEFAULT NULL COMMENT 'e-mail',
+  `subject_id` int(11) DEFAULT NULL COMMENT '科室ID',
+  PRIMARY KEY (`doctor_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of doctor_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for menu
+-- ----------------------------
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE `menu` (
+  `menu_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
+  `menu_name` varchar(30) DEFAULT NULL COMMENT '菜单名称',
+  `menu_url` varchar(30) DEFAULT NULL COMMENT '菜单连接',
+  `parent_id` int(11) DEFAULT NULL COMMENT '父级ID',
+  `menu_desc` int(11) DEFAULT NULL COMMENT '排序号',
+  PRIMARY KEY (`menu_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of menu
+-- ----------------------------
+INSERT INTO `menu` VALUES ('1', '专家信息管理', null, '5', '1');
+INSERT INTO `menu` VALUES ('2', '用户信息管理', null, '5', '2');
+INSERT INTO `menu` VALUES ('3', '预约信息管理', null, '5', '3');
+INSERT INTO `menu` VALUES ('4', '管理员信息管理', null, '5', '4');
+INSERT INTO `menu` VALUES ('5', '系统功能', null, '0', null);
+
+-- ----------------------------
+-- Table structure for subject
+-- ----------------------------
+DROP TABLE IF EXISTS `subject`;
+CREATE TABLE `subject` (
+  `subject_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '科室ID',
+  `subject_describe` varchar(2000) DEFAULT NULL COMMENT '科室描述',
+  `subject_name` varchar(30) DEFAULT NULL COMMENT '科室名称',
+  PRIMARY KEY (`subject_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of subject
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user_info
+-- ----------------------------
+DROP TABLE IF EXISTS `user_info`;
+CREATE TABLE `user_info` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `user_name` varchar(50) DEFAULT NULL COMMENT '用户名',
+  `account` varchar(50) DEFAULT NULL COMMENT '账号',
+  `password` varchar(50) DEFAULT NULL COMMENT '密码',
+  `sex` varchar(20) DEFAULT NULL COMMENT '性别',
+  `birthday` datetime DEFAULT NULL COMMENT '生日',
+  `id_card` varchar(18) DEFAULT NULL COMMENT '身份证号',
+  `relationway` varchar(12) DEFAULT NULL COMMENT '联系电话',
+  `address` varchar(50) DEFAULT NULL COMMENT '地址',
+  `user_type` int(2) DEFAULT NULL COMMENT '用户类型',
+  `user_register` datetime DEFAULT NULL COMMENT '注册时间',
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_info
+-- ----------------------------
+INSERT INTO `user_info` VALUES ('35', '张三', 'admin', 'admin', null, null, null, null, null, '2', null);
+INSERT INTO `user_info` VALUES ('36', '123456', '123456', '123456', null, null, null, null, null, '1', null);
