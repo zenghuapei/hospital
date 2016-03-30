@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.system.dao.DoctorInfoDao">
+	<resultMap type="DoctorInfo" id="doctorInfo">
+		<result property="doctorId" column="doctor_id"/>
+		<result property="doctorBrief" column="doctor_brief"/>
+		<result property="doctorCode" column="doctor_code"/>
+		<result property="doctorName" column="doctor_name"/>
+		<result property="doctorPic" column="doctor_pic"/>
+		<result property="doctorPost" column="doctor_post"/>
+		<result property="doctorSex" column="doctor_sex"/>
+		<result property="doctorSpecialty" column="doctor_specialty"/>
+		<result property="doctorType" column="doctor_type"/>
+		<result property="doctorXl" column="doctor_xl"/>
+		<result property="doctorYears" column="doctor_years"/>
+		<result property="email" column="email"/>
+		<result property="subjectId" column="subject_id"/>
+	</resultMap>
+	
+	<!-- 查询 -->
+	<select id="getDoctorInfoList" resultMap="doctorInfo" parameterType="DoctorInfo">
+		
+	</select>
+	<!-- 添加 -->
+	<insert id="addDoctorInfo" parameterType="DoctorInfo">
+		insert into doctor_info
+		(
+		<trim suffixOverrides="," suffix="">
+			<if test="doctorBrief!=null">doctor_brief,</if>
+			<if test="doctorCode!=null">doctor_code,</if>
+			<if test="doctorName!=null">doctor_name,</if>
+			<if test="doctorPic!=null">doctor_pic,</if>
+			<if test="doctorPost!=null">doctor_post,</if>
+			<if test="doctorSex!=null">doctor_sex,</if>
+			<if test="doctorSpecialty!=null">doctor_specialty,</if>
+			<if test="doctorType!=null">doctor_type,</if>
+			<if test="doctorXl!=null">doctor_xl,</if>
+			<if test="doctorYears!=null">doctor_years,</if>
+			<if test="email!=null">email,</if>
+			<if test="subjectId!=null">subject_id,</if>
+		</trim>
+		)values(
+		<trim suffixOverrides="," suffix="">
+			<if test="doctorBrief!=null">#{doctorBrief},</if>
+			<if test="doctorCode!=null">#{doctorCode},</if>
+			<if test="doctorName!=null">#{doctorName},</if>
+			<if test="doctorPic!=null">#{doctorPic},</if>
+			<if test="doctorPost!=null">#{doctorPost},</if>
+			<if test="doctorSex!=null">#{doctorSex},</if>
+			<if test="doctorSpecialty!=null">#{doctorSpecialty},</if>
+			<if test="doctorType!=null">#{doctorType},</if>
+			<if test="doctorXl!=null">#{doctorXl},</if>
+			<if test="doctorYears!=null">#{doctorYears},</if>
+			<if test="email!=null">#{email},</if>
+			<if test="subjectId!=null">#{subjectId},</if>
+		</trim>
+		)
+	</insert>
+	<!-- 修改 -->
+	<update id="updateDoctorInfo" parameterType="DoctorInfo">
+		update doctor_info set 
+		<trim suffixOverrides=",">
+			<if test="doctorBrief!=null">doctor_brief=#{doctorBrief}</if>
+			<if test="doctorCode!=null">doctor_code=#{doctorCode}</if>
+			<if test="doctorName!=null">doctor_name=#{doctorName}</if>
+			<if test="doctorPic!=null">doctor_pic=#{doctorPic}</if>
+			<if test="doctorPost!=null">doctor_post=#{doctorPost}</if>
+			<if test="doctorSex!=null">doctor_sex=#{doctorSex}</if>
+			<if test="doctorSpecialty!=null">doctor_specialty=#{doctorSpecialty}</if>
+			<if test="doctorType!=null">doctor_type=#{doctorType}</if>
+			<if test="doctorXl!=null">doctor_xl=#{doctorXl}</if>
+			<if test="doctorYears!=null">doctor_years=#{doctorYears}</if>
+			<if test="email!=null">email=#{email}</if>
+			<if test="subjectId!=null">subject_id=#{subjectId}</if>
+		</trim>
+		<where>doctor_id=#{doctorId}</where>
+	</update>
+	<delete id="deleteDoctorInfo" parameterType="DoctorInfo">
+		delete from doctor_info where doctor_id=#{doctorId}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
