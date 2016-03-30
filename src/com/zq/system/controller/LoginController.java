@@ -84,7 +84,7 @@ public class LoginController {
     @RequestMapping(value="/logout",method=RequestMethod.GET)  
     public String logout(HttpServletRequest request){  
     	request.getSession().removeAttribute(CommonConstants.SEESION_MEMBER);
-         return "../login.jsp"; 
+         return "../login1"; 
     }
     @RequestMapping("/test")  
     @ResponseBody

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2016-03-29 22:14:33
+Date: 2016-03-30 21:30:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -52,10 +52,46 @@ CREATE TABLE `doctor_info` (
   `email` varchar(30) DEFAULT NULL COMMENT 'e-mail',
   `subject_id` int(11) DEFAULT NULL COMMENT '科室ID',
   PRIMARY KEY (`doctor_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of doctor_info
+-- ----------------------------
+INSERT INTO `doctor_info` VALUES ('1', '擅长自体及异基因造血干细胞移植治疗白血病、淋巴瘤、多发性骨髓瘤等恶性血液病', '1017', '王劲', null, '副主任医师', '男', null, null, '本科', '10', 'sdfsd', '5');
+INSERT INTO `doctor_info` VALUES ('2', '', '1018', '技术', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '5');
+INSERT INTO `doctor_info` VALUES ('3', '', '1001', '技术1', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '5');
+INSERT INTO `doctor_info` VALUES ('14', '', '1002', '技术2', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '5');
+INSERT INTO `doctor_info` VALUES ('15', '', '1003', '技术3', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '6');
+INSERT INTO `doctor_info` VALUES ('16', '', '1004', '技术4', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '6');
+INSERT INTO `doctor_info` VALUES ('17', '', '1005', '技术5', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '7');
+INSERT INTO `doctor_info` VALUES ('18', '', '1006', '技术6', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '7');
+INSERT INTO `doctor_info` VALUES ('19', '', '1007', '技术7', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '8');
+INSERT INTO `doctor_info` VALUES ('20', '', '1008', '技术8', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '8');
+INSERT INTO `doctor_info` VALUES ('21', '', '1009', '技术9', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '9');
+INSERT INTO `doctor_info` VALUES ('22', '', '1010', '技术10', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '9');
+INSERT INTO `doctor_info` VALUES ('23', '', '1011', '技术11', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '10');
+INSERT INTO `doctor_info` VALUES ('24', '', '1012', '技术12', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '10');
+INSERT INTO `doctor_info` VALUES ('25', '', '1013', '技术13', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '11');
+INSERT INTO `doctor_info` VALUES ('26', '', '1014', '技术14', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '11');
+INSERT INTO `doctor_info` VALUES ('27', '', '1015', '技术15', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '12');
+INSERT INTO `doctor_info` VALUES ('28', '', '1016', '技术16', null, '普通医师', '女', null, null, '本科', '5', 'dfd', '12');
+
+-- ----------------------------
+-- Table structure for duty_info
+-- ----------------------------
+DROP TABLE IF EXISTS `duty_info`;
+CREATE TABLE `duty_info` (
+  `duty_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '值班信息ID',
+  `duty_time` varchar(20) DEFAULT NULL COMMENT '值班时间',
+  `duty_interval` varchar(30) DEFAULT NULL COMMENT '时间间隔',
+  `doctor_id` int(11) DEFAULT NULL COMMENT '医生ID',
+  `max_booknum` int(11) DEFAULT NULL COMMENT '最大预约数',
+  `subject_id` int(11) DEFAULT NULL COMMENT '科室ID',
+  PRIMARY KEY (`duty_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of duty_info
 -- ----------------------------
 
 -- ----------------------------
@@ -88,12 +124,26 @@ CREATE TABLE `subject` (
   `subject_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '科室ID',
   `subject_describe` varchar(2000) DEFAULT NULL COMMENT '科室描述',
   `subject_name` varchar(30) DEFAULT NULL COMMENT '科室名称',
+  `parent_id` int(11) DEFAULT NULL COMMENT '父级id',
+  `subject_level` int(11) DEFAULT NULL COMMENT '级别',
   PRIMARY KEY (`subject_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of subject
 -- ----------------------------
+INSERT INTO `subject` VALUES ('1', null, '内科', null, '1');
+INSERT INTO `subject` VALUES ('2', null, '外科', null, '1');
+INSERT INTO `subject` VALUES ('3', null, '专科', null, '1');
+INSERT INTO `subject` VALUES ('4', null, '其他', null, '1');
+INSERT INTO `subject` VALUES ('5', null, '血液内科门诊', '1', '2');
+INSERT INTO `subject` VALUES ('6', null, '心血管内科门诊', '1', '2');
+INSERT INTO `subject` VALUES ('7', null, '胸外科门诊', '2', '2');
+INSERT INTO `subject` VALUES ('8', null, '心血管外科门诊', '2', '2');
+INSERT INTO `subject` VALUES ('9', null, '产科门诊', '3', '2');
+INSERT INTO `subject` VALUES ('10', null, '儿科门诊', '3', '2');
+INSERT INTO `subject` VALUES ('11', null, '肿瘤生物治疗门诊', '4', '2');
+INSERT INTO `subject` VALUES ('12', null, '静脉置管护理门诊', '4', '2');
 
 -- ----------------------------
 -- Table structure for user_info
@@ -112,10 +162,13 @@ CREATE TABLE `user_info` (
   `user_type` int(2) DEFAULT NULL COMMENT '用户类型',
   `user_register` datetime DEFAULT NULL COMMENT '注册时间',
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
+INSERT INTO `user_info` VALUES ('56', 'e12345', 'e12345', 'e12345', null, null, null, '15202350451', null, '1', '2016-03-30 21:04:46');
+INSERT INTO `user_info` VALUES ('54', 'd12345', 'd12345', 'd12345', null, null, null, '15202350749', null, '1', null);
+INSERT INTO `user_info` VALUES ('55', 'w12345', 'w12345', 'w12345', null, null, null, '15202350745', null, '1', null);
 INSERT INTO `user_info` VALUES ('35', '张三', 'admin', 'admin', null, null, null, null, null, '2', null);
-INSERT INTO `user_info` VALUES ('36', '123456', '123456', '123456', null, null, null, null, null, '1', null);
+INSERT INTO `user_info` VALUES ('36', '123456', '123456', '123456', '男', '2016-03-30 20:42:53', null, '15202350755', '重庆市', '1', '2016-03-30 20:43:50');

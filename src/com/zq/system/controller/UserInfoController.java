@@ -68,6 +68,7 @@ public class UserInfoController  extends BaseController{
 		userinfo.setUserType(1);
 		userinfo.setUserName(userinfo.getAccount());
 		userInfoService.insertUserInfo(userinfo);
+		request.setAttribute("userInfo", userinfo);
 		return "注册成功";
 	}
 }

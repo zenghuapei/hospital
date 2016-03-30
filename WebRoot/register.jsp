@@ -29,6 +29,7 @@
     	<div style="width: 50%;margin: 0 auto;">
     	
 		 <div class="form-group">
+		 	<label for="exampleInputEmail2">用户名</label>
 	   		 <input type="text" name="account" class="form-control" id="t_account" placeholder="以字母开头，5-15位，字母数字下划线" required autofocus>
 	   		<span class="help-inline" id="s_account"></span>
 		  </div>
@@ -65,7 +66,7 @@
 	                data: params1,
 	                cache: false,
 	                success: function (text) {
-	                    window.location = "./index.jsp";
+	                    window.location = "./login1.jsp";
 	                }
 	            });
 	        }

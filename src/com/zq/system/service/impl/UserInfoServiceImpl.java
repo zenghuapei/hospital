@@ -39,11 +39,6 @@ public class UserInfoServiceImpl implements UserInfoService{
 		userInfoDao.getAllUserInfo(likeCondition);
 		return null;
 	}
-
-	/* (non-Javadoc)
-	 * @see com.zq.system.service.UserInfoService#getOneUserInfo(java.lang.Long)
-	 * 根据用户名查询用户数据
-	 */
 	public UserInfo getOneUserInfo(String account) {
 		
 		return userInfoDao.getUserInfo(account);

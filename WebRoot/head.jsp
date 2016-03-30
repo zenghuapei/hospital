@@ -25,7 +25,7 @@
 				<a href="register.jsp" class="button button-uppercase button-primary">注册</a>    
 		   </c:when>
 		   <c:otherwise> 
-				  欢迎：<a>${sessionScope.currentUser.userName}</a> <a href="./LoginController/logout.do">退出</a>
+				  欢迎：<a>${sessionScope.currentUser.userName}</a> <a href="./logout.do">退出</a>
 		   </c:otherwise>
 		</c:choose>
 			

@@ -70,7 +70,7 @@
 	<insert id="insertUserInfo" parameterType="UserInfo">
 	insert into user_info(user_id,user_Name,account,password,Sex,birthday,id_card,relationway,address,user_type,user_register) 
 	
-	values(#{userId},#{userName},#{account},#{password},#{sex},#{birthday},#{idCard},#{relationway},#{address},#{userType},#{userRegister})	
+	values(#{userId},#{userName},#{account},#{password},#{sex},#{birthday},#{idCard},#{relationway},#{address},#{userType},NOW())	
 	</insert>
 	<!--查询用户和账号信息-->
 	<select id="getUserInfo" resultMap="userinfo" parameterType="string">
