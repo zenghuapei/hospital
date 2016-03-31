@@ -1,5 +1,6 @@
 package com.zq.system.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,15 @@ public class SubjectServiceImpl implements SubjectService {
 	@Autowired
 	private SubjectDao subjectDao;
 
-	public List<Subject> getSubjectList(Subject subject) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Subject> getSubjectList(Integer level) {
+		List<Subject> subjectlevel = subjectDao.getSubjectList();
+		List<Subject> returnList = new ArrayList<Subject>();
+		for (Subject subject : subjectlevel) {
+			List<Subject> pSubject = subjectDao.getParentSubjectList(subject.getSubjectId());
+			subject.setSubjectList(pSubject);
+			returnList.add(subject);
+		}
+		return returnList;
 	}
 
 	public Integer addSubject(Subject subject) {

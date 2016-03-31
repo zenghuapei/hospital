@@ -1,5 +1,7 @@
 package com.zq.system.entity;
 
+import java.util.List;
+
 /**
  * @author Administrator
  *科室信息
@@ -28,7 +30,8 @@ public class Subject {
 	 */
 	private Integer subjectLevel;
 
-
+	private List<Subject> subjectList;
+	
 	public Integer getSubjectId() {
 		return subjectId;
 	}
@@ -76,6 +79,16 @@ public class Subject {
 
 	public void setSubjectLevel(Integer subjectLevel) {
 		this.subjectLevel = subjectLevel;
+	}
+
+
+	public List<Subject> getSubjectList() {
+		return subjectList;
+	}
+
+
+	public void setSubjectList(List<Subject> subjectList) {
+		this.subjectList = subjectList;
 	}
 	
 	

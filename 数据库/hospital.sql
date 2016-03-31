@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2016-03-30 21:30:34
+Date: 2016-03-31 23:07:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -87,6 +87,7 @@ CREATE TABLE `duty_info` (
   `doctor_id` int(11) DEFAULT NULL COMMENT '医生ID',
   `max_booknum` int(11) DEFAULT NULL COMMENT '最大预约数',
   `subject_id` int(11) DEFAULT NULL COMMENT '科室ID',
+  `duty_date` datetime DEFAULT NULL COMMENT '出诊日期',
   PRIMARY KEY (`duty_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

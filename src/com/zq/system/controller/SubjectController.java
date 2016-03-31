@@ -1,5 +1,7 @@
 package com.zq.system.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zq.common.controller.BaseController;
+import com.zq.system.entity.Subject;
 import com.zq.system.service.SubjectService;
 
 @Controller("SubjectController")
@@ -33,10 +36,11 @@ public class SubjectController extends BaseController{
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="/querySubject", method=RequestMethod.POST)
+	@RequestMapping(value="/querySubject", method=RequestMethod.GET)
 	public Object querySubject(HttpServletRequest request){
-		
-		return "";
+		List<Subject> subjectList = subjectService.getSubjectList(1);
+		request.setAttribute("subjectList", subjectList);
+		return "hospatil/make";
 	}
 	/**
 	 * 修改科室信息

@@ -11,9 +11,27 @@
 	</resultMap>
 	
 	
-	<!-- 查询 -->
-	<select id="getSubjectList" resultMap="subject" parameterType="Subject">
-		
+	<!-- 查询 根节点-->
+	<select id="getSubjectList" resultMap="subject">
+		SELECT
+			`subject`.subject_id,
+			`subject`.subject_describe,
+			`subject`.subject_name,
+			`subject`.parent_id,
+			`subject`.subject_level
+			FROM
+			`subject` WHERE `subject`.subject_level=1
+	</select>
+	<!-- 查询 根节点-->
+	<select id="getParentSubjectList" resultMap="subject" parameterType="int">
+		SELECT
+			`subject`.subject_id,
+			`subject`.subject_describe,
+			`subject`.subject_name,
+			`subject`.parent_id,
+			`subject`.subject_level
+			FROM
+			`subject` WHERE `subject`.parent_Id=#{parentId}
 	</select>
 	<!-- 添加 -->
 	<insert id="addSubject" parameterType="Subject">

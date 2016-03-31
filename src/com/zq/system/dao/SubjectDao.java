@@ -15,7 +15,13 @@ public interface SubjectDao {
 	 * @param userId
 	 * @return
 	 */
-	 public List<Subject> getSubjectList(Subject subject);
+	 public List<Subject> getSubjectList();
+	 /**
+	  * 父级节点查询子集
+	 * @param parentId
+	 * @return
+	 */
+	public List<Subject> getParentSubjectList(Integer parentId);
 	/**
 	 * 添加科室
 	 * @param menu

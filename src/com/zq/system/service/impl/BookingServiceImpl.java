@@ -14,7 +14,7 @@ public class BookingServiceImpl implements BookingService {
 	private BookingDao bookingDao;
 
 	public List<Booking> getBookingList(Booking booking) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

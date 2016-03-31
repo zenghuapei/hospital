@@ -35,7 +35,7 @@
 	        <h1>XX医院网上挂号系统</h1>	        	        	     	        
 	</div>
 	<div class="button-group" style="text-align: center;">
-	    <a  class="button button-uppercase button-primary" style="margin-left: 150px" href="view/hospatil/make.jsp">网上预约挂号</a>
+	    <a  class="button button-uppercase button-primary" style="margin-left: 150px" href="./subject/querySubject.do">网上预约挂号</a>
 	    <a  class="button button-uppercase button-primary" style="margin-left: 150px" href="view/hospatil/makeQuery.jsp">预约挂号查询</a>
 	    <a  class="button button-uppercase button-primary" style="margin-left: 150px" href="view/hospatil/deselectMake.jsp">取消网上预约</a>
  	 </div>

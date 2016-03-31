@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+       <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
       <%@ page isELIgnored="false" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,14 +21,23 @@
 </head>
 <body>
 <div class="container">
-<jsp:include page="./head.jsp"></jsp:include>
+<jsp:include page="../../head.jsp"></jsp:include>
  <div id="main" style="width: 100%;overflow:hidden;margin-top: 20px">
- 	<div id="left" style="width:30%;height: 500px;border: 1px solid red;">
- 	
- 	</div>
- 	<div id="right" style="width:70%;height: 500px;border: 1px solid red;">
- 	
- 	</div>
+ 	 <div style="margin-top: 50px">
+				<table  class="table table-bordered" style="width: 70%;margin: 0 auto;" >
+					<c:forEach items="${requestScope.subjectList}" var="subjectList">
+						<tr >
+							  <td style="width: 200px;text-align: right;"><h2>${ subjectList.subjectName}：</h2></td>
+							  <td>
+							  <c:forEach items="${subjectList.subjectList }" var="subject">
+								  <a>${subject.subjectName}</a>
+							  </c:forEach>
+							  </td>
+						</tr> 
+					</c:forEach>
+					
+		 		</table>
+		   </div>
  </div>
 </div>
 

@@ -12,7 +12,7 @@ public interface SubjectService {
 	 * @param userId
 	 * @return
 	 */
-	 public List<Subject> getSubjectList(Subject subject);
+	 public List<Subject> getSubjectList(Integer level);
 	/**
 	 * 添加科室
 	 * @param menu

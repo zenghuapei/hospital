@@ -1,5 +1,9 @@
 package com.zq.system.entity;
 
+import java.util.Date;
+
+
+
 /**
  * @author zenghuapei
  *值班信息
@@ -29,6 +33,11 @@ public class DutyInfo {
 	 * 科室ID
 	 */
 	private Integer subjectId;
+	
+	/**
+	 * 出诊时间
+	 */
+	private Date dutyDate;
 	public Integer getDutyId() {
 		return dutyId;
 	}
@@ -64,6 +73,12 @@ public class DutyInfo {
 	}
 	public void setSubjectId(Integer subjectId) {
 		this.subjectId = subjectId;
+	}
+	public Date getDutyDate() {
+		return dutyDate;
+	}
+	public void setDutyDate(Date dutyDate) {
+		this.dutyDate = dutyDate;
 	}
 	
 	
