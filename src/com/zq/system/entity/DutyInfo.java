@@ -38,6 +38,10 @@ public class DutyInfo {
 	 * 出诊时间
 	 */
 	private Date dutyDate;
+	/**
+	 * 医生信息
+	 */
+	private DoctorInfo doctorInfo;
 	public Integer getDutyId() {
 		return dutyId;
 	}
@@ -79,6 +83,12 @@ public class DutyInfo {
 	}
 	public void setDutyDate(Date dutyDate) {
 		this.dutyDate = dutyDate;
+	}
+	public DoctorInfo getDoctorInfo() {
+		return doctorInfo;
+	}
+	public void setDoctorInfo(DoctorInfo doctorInfo) {
+		this.doctorInfo = doctorInfo;
 	}
 	
 	

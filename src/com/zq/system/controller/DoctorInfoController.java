@@ -1,5 +1,7 @@
 package com.zq.system.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zq.common.controller.BaseController;
+import com.zq.system.entity.DoctorInfo;
 import com.zq.system.service.DoctorInfoService;
 
 @Controller("DoctorInfoController")
@@ -31,10 +34,13 @@ public class DoctorInfoController extends BaseController{
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="/queryDoctorInfo", method=RequestMethod.POST)
-	public Object queryDoctorInfo(HttpServletRequest request){
-		
-		return "";
+	@RequestMapping(value="/queryDoctorInfo", method=RequestMethod.GET)
+	public Object queryDoctorInfo(HttpServletRequest request,DoctorInfo doctorInfo){
+//		String subjectId = request.getParameter("subjectId");
+//		DoctorInfo do
+		List<DoctorInfo> doctorList = doctorInfoService.getDoctorInfoList(doctorInfo);
+		request.setAttribute("doctorList", doctorList);
+		return "hospital/makeDoctor";
 	}
 	/**
 	 * 修改医生信息

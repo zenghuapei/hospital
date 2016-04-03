@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zq.system.dao.DutyInfoDao">
+	<resultMap type="DutyInfo" id="dutyInfo">
+		<result property="dutyId" column="duty_Id"/>
+		<result property="dutyTime" column="duty_Time"/>
+		<result property="dutyInterval" column="duty_Interval"/>
+		<result property="doctorId" column="doctor_Id"/>
+		<result property="maxBookNum" column="max_BookNum"/>
+		<result property="subjectId" column="subject_Id"/>
+		<result property="dutyDate" column="duty_Date"/>
+	</resultMap>
+	
+	
+	<select id="getDutyInfoList" resultMap="dutyInfo" parameterType="DutyInfo">
+		SELECT
+			duty_info.duty_id,
+			duty_info.duty_time,
+			duty_info.duty_interval,
+			duty_info.doctor_id,
+			duty_info.max_booknum,
+			duty_info.subject_id,
+			duty_info.duty_date
+			FROM
+			duty_info where doctor_id=#{doctorId}
+		
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

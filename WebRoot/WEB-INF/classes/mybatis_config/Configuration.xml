@@ -16,9 +16,10 @@
 	<typeAliases>
 		<typeAlias type="com.zq.system.entity.UserInfo" alias="UserInfo"/>	
 	    <typeAlias type="com.zq.system.entity.Menu" alias="Menu"/>	
-	     <typeAlias type="com.zq.system.entity.Booking" alias="Booking"/>	
-	      <typeAlias type="com.zq.system.entity.DoctorInfo" alias="DoctorInfo"/>	
-	       <typeAlias type="com.zq.system.entity.Subject" alias="Subject"/>	
+	    <typeAlias type="com.zq.system.entity.Booking" alias="Booking"/>	
+	    <typeAlias type="com.zq.system.entity.DoctorInfo" alias="DoctorInfo"/>	
+	    <typeAlias type="com.zq.system.entity.Subject" alias="Subject"/>	
+	    <typeAlias type="com.zq.system.entity.DutyInfo" alias="DutyInfo"/>	
 	    <typeAlias type="com.zq.common.page.Page" alias="Page"/>	
 	</typeAliases>
 	
@@ -34,6 +35,7 @@
 		<mapper resource="com/zq/system/mapper/Booking.xml"/>
 		<mapper resource="com/zq/system/mapper/DoctorInfo.xml"/>
 		<mapper resource="com/zq/system/mapper/Subject.xml"/>
+		<mapper resource="com/zq/system/mapper/DutyInfo.xml"/>
 	</mappers>
 	
 </configuration>

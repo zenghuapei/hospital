@@ -22,18 +22,24 @@
 		(
 		<trim suffixOverrides="," suffix="">
 		<if test="bookingState!=null">booking_state,</if>
-		<if test="bookingTime!=null">booking_time,</if>
 		<if test="booknow!=null">booknow,</if>
 		<if test="doctorId!=null">doctor_id,</if>
 		<if test="userId!=null">user_id,</if>
+		<if test="bookName!=null">book_name,</if>
+		<if test="bookIdCard!=null">book_idCard,</if>
+		<if test="bookNum!=null">book_num,</if>
+		<if test="bookAddress!=null">book_address,</if>
 		</trim>
 		)values(
 		<trim suffixOverrides="," suffix="">
 		<if test="bookingState!=null">#{bookingState},</if>
-		<if test="bookingTime!=null">#{bookingTime},</if>
 		<if test="booknow!=null">#{booknow},</if>
 		<if test="doctorId!=null">#{doctorId},</if>
 		<if test="userId!=null">#{userId},</if>
+		<if test="bookName!=null">#{bookName},</if>
+		<if test="bookIdCard!=null">#{bookIdCard},</if>
+		<if test="bookNum!=null">#{bookNum},</if>
+		<if test="bookAddress!=null">#{bookAddress},</if>
 		</trim>
 		)
 	</insert>

@@ -1,5 +1,6 @@
 package com.zq.system.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import com.zq.common.controller.BaseController;
 import com.zq.common.dto.Dto;
 import com.zq.common.page.Page;
 import com.zq.common.util.WebUtil;
+import com.zq.system.entity.Booking;
 import com.zq.system.entity.Menu;
 import com.zq.system.entity.UserInfo;
 import com.zq.system.service.BookingService;
@@ -35,9 +37,10 @@ public class BookingController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value="/addBooking", method=RequestMethod.POST)
-	public Object addBooking(HttpServletRequest request){
-		
-		return "";
+	public Object addBooking(HttpServletRequest request,Booking booking){
+		booking.setBooknow(new Date());
+		bookingService.addBooking(booking);
+		return "hospital/bookingQuery";
 	}
 	/**
 	 * 查询预约信息
@@ -68,5 +71,16 @@ public class BookingController extends BaseController{
 	public Object deleteBooking(HttpServletRequest request){
 		
 		return "";
+	}
+	/**
+	 * 删除预约信息
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/jumbBooking", method=RequestMethod.GET)
+	public Object jumbBooking(HttpServletRequest request){
+		String doctorId = request.getParameter("doctorId");
+		request.setAttribute("doctorId", doctorId);
+		return "hospital/addBook";
 	}
 }

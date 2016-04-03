@@ -1,5 +1,7 @@
 package com.zq.system.entity;
 
+import java.util.List;
+
 /**
  * @author Administrator
  *医生信息表
@@ -57,6 +59,11 @@ public class DoctorInfo {
 	 * 科室ID
 	 */
 	private Integer subjectId;
+	
+	/**
+	 * 值班信息表
+	 */
+	private List<DutyInfo> dutyInfoList;
 	public Integer getDoctorId() {
 		return doctorId;
 	}
@@ -135,6 +142,13 @@ public class DoctorInfo {
 	public void setSubjectId(Integer subjectId) {
 		this.subjectId = subjectId;
 	}
+	public List<DutyInfo> getDutyInfoList() {
+		return dutyInfoList;
+	}
+	public void setDutyInfoList(List<DutyInfo> dutyInfoList) {
+		this.dutyInfoList = dutyInfoList;
+	}
+	
 	
 	
 	

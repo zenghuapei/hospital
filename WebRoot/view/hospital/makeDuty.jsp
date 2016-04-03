@@ -1,6 +1,7 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
        <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+       <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
       <%@ page isELIgnored="false" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -25,17 +26,29 @@
  <div id="main" style="width: 100%;overflow:hidden;margin-top: 20px">
  	 <div style="margin-top: 50px">
 				<table  class="table table-bordered" style="width: 70%;margin: 0 auto;" >
-					<c:forEach items="${requestScope.subjectList}" var="subjectList">
 						<tr >
-							  <td style="width: 200px;text-align: right;"><h2>${ subjectList.subjectName}：</h2></td>
-							  <td>
-							  <c:forEach items="${subjectList.subjectList }" var="subject">
-								  <a>${subject.subjectName}</a>
-							  </c:forEach>
-							  </td>
+							  <td style="width: 250px;text-align: right;"><h3>${requestScope.doctorInfo.doctorName }：<h3></td>
+								  <td style="font-size: 15px" colspan="4">
+								  	${requestScope.doctorInfo.doctorBrief }
+								  </td >
+									
 						</tr> 
-					</c:forEach>
-					
+						<tr>
+							<td>出诊时间</td>
+							<td>值班时间</td>
+							<td>值班时间段</td>
+							<td>预约总数</td>
+							<td>操作</td>
+						</tr>
+						<c:forEach items="${requestScope.doctorInfo.dutyInfoList}" var="dutyInfoList">
+							<tr>
+								<td><fmt:formatDate value="${dutyInfoList.dutyDate }" type="date"/></td>
+								<td>${dutyInfoList.dutyTime }</td>
+								<td>${dutyInfoList.dutyInterval }</td>
+								<td>${dutyInfoList.maxBookNum }</td>
+								<td><a href="${pageContext.request.contextPath}/booking/jumbBooking.do?doctorId=${dutyInfoList.doctorId }">预约</a></td>
+							</tr>
+						</c:forEach>
 		 		</table>
 		   </div>
  </div>

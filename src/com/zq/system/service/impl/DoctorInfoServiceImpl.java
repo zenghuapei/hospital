@@ -18,8 +18,8 @@ public class DoctorInfoServiceImpl implements DoctorInfoService {
 	private DoctorInfoDao doctorInfoDao;
 
 	public List<DoctorInfo> getDoctorInfoList(DoctorInfo doctorInfo) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return doctorInfoDao.getDoctorInfoList(doctorInfo);
 	}
 
 	public Integer addDoctorInfo(DoctorInfo doctorInfo) {

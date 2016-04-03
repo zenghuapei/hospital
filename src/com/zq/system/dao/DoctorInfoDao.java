@@ -16,6 +16,12 @@ public interface DoctorInfoDao {
 	 * @return
 	 */
 	 public List<DoctorInfo> getDoctorInfoList(DoctorInfo doctorInfo);
+	 /**
+	  * 查询单条医生信息
+	 * @param doctorId
+	 * @return
+	 */
+	public DoctorInfo getDoctorDuty(int doctorId);
 	/**
 	 * 添加医生
 	 * @param doctorInfo

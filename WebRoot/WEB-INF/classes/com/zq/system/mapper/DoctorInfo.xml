@@ -21,7 +21,41 @@
 	
 	<!-- 查询 -->
 	<select id="getDoctorInfoList" resultMap="doctorInfo" parameterType="DoctorInfo">
-		
+		SELECT
+			doctor_info.doctor_id,
+			doctor_info.doctor_brief,
+			doctor_info.doctor_code,
+			doctor_info.doctor_name,
+			doctor_info.doctor_pic,
+			doctor_info.doctor_post,
+			doctor_info.doctor_sex,
+			doctor_info.doctor_specialty,
+			doctor_info.doctor_type,
+			doctor_info.doctor_xl,
+			doctor_info.doctor_years,
+			doctor_info.email,
+			doctor_info.subject_id
+			FROM
+			doctor_info where subject_id=#{subjectId}
+	</select>
+	<!-- 查询 -->
+	<select id="getDoctorDuty" resultMap="doctorInfo" parameterType="int">
+		SELECT
+			doctor_info.doctor_id,
+			doctor_info.doctor_brief,
+			doctor_info.doctor_code,
+			doctor_info.doctor_name,
+			doctor_info.doctor_pic,
+			doctor_info.doctor_post,
+			doctor_info.doctor_sex,
+			doctor_info.doctor_specialty,
+			doctor_info.doctor_type,
+			doctor_info.doctor_xl,
+			doctor_info.doctor_years,
+			doctor_info.email,
+			doctor_info.subject_id
+			FROM
+			doctor_info where doctor_id=#{doctorId}
 	</select>
 	<!-- 添加 -->
 	<insert id="addDoctorInfo" parameterType="DoctorInfo">

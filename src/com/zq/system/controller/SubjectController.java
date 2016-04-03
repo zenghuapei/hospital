@@ -40,7 +40,7 @@ public class SubjectController extends BaseController{
 	public Object querySubject(HttpServletRequest request){
 		List<Subject> subjectList = subjectService.getSubjectList(1);
 		request.setAttribute("subjectList", subjectList);
-		return "hospatil/make";
+		return "hospital/make";
 	}
 	/**
 	 * 修改科室信息

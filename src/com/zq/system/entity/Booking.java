@@ -18,22 +18,36 @@ public class Booking {
 	 * 预约状态
 	 */
 	private String bookingState;
-	/**
-	 * 出诊时间
-	 */
-	private Date bookingTime;
+	
 	/**
 	 * 挂号时间
 	 */
 	private Date booknow;
 	/**
 	 * 医生ID
-	 */
+	 */ 
 	private Integer doctorId;
 	/**
 	 * 用户ID
 	 */
 	private Integer userId;
+	
+	/**
+	 * 预约姓名
+	 */
+	private String bookName;
+	/**
+	 * 身份证号
+	 */
+	private String bookIdCard;
+	/**
+	 * 手机
+	 */
+	private String bookNum;
+	/**
+	 * 地址
+	 */
+	private String bookAddress;
 	public Integer getBookingId() {
 		return bookingId;
 	}
@@ -45,14 +59,6 @@ public class Booking {
 	}
 	public void setBookingState(String bookingState) {
 		this.bookingState = bookingState;
-	}
-	@JsonSerialize(using = DateSerializer.class)
-	public Date getBookingTime() {
-		return bookingTime;
-	}
-	@JsonSerialize(using = DateSerializer.class)
-	public void setBookingTime(Date bookingTime) {
-		this.bookingTime = bookingTime;
 	}
 	@JsonSerialize(using = DateSerializer.class)
 	public Date getBooknow() {
@@ -73,6 +79,30 @@ public class Booking {
 	}
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+	public String getBookIdCard() {
+		return bookIdCard;
+	}
+	public void setBookIdCard(String bookIdCard) {
+		this.bookIdCard = bookIdCard;
+	}
+	public String getBookNum() {
+		return bookNum;
+	}
+	public void setBookNum(String bookNum) {
+		this.bookNum = bookNum;
+	}
+	public String getBookAddress() {
+		return bookAddress;
+	}
+	public void setBookAddress(String bookAddress) {
+		this.bookAddress = bookAddress;
 	}
 	
 }

@@ -19,8 +19,7 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	public Integer addBooking(Booking booking) {
-		// TODO Auto-generated method stub
-		return null;
+		return bookingDao.addBooking(booking);
 	}
 
 }

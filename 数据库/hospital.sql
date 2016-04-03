@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2016-03-31 23:07:34
+Date: 2016-04-03 23:13:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,16 +22,23 @@ DROP TABLE IF EXISTS `booking`;
 CREATE TABLE `booking` (
   `booking_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '预约信息ID',
   `booking_state` varchar(20) DEFAULT NULL COMMENT '预约状态',
-  `booking_time` datetime DEFAULT NULL COMMENT '出诊时间',
   `booknow` datetime DEFAULT NULL COMMENT '挂号时间',
   `doctor_id` int(11) DEFAULT NULL COMMENT '医生ID',
   `user_id` int(11) DEFAULT NULL COMMENT '用户ID',
+  `book_name` varchar(50) DEFAULT NULL COMMENT '姓名',
+  `book_idCard` varchar(18) DEFAULT NULL COMMENT '身份证号',
+  `book_num` varchar(12) DEFAULT NULL COMMENT '电话',
+  `book_address` varchar(100) DEFAULT NULL COMMENT '地址',
   PRIMARY KEY (`booking_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of booking
 -- ----------------------------
+INSERT INTO `booking` VALUES ('1', null, null, '1', null, '电饭锅', '34534534534', '145456456564', null);
+INSERT INTO `booking` VALUES ('2', null, null, '1', null, '士大夫但是', '34543534', '4545656', null);
+INSERT INTO `booking` VALUES ('3', null, null, '1', null, '豆腐干豆腐', '34534543', '453453453', '豆腐干豆腐干');
+INSERT INTO `booking` VALUES ('4', null, '2016-04-03 00:00:00', '1', null, '范甘迪', '353543543', '45345435', '豆腐干地方');
 
 -- ----------------------------
 -- Table structure for doctor_info
@@ -87,13 +94,26 @@ CREATE TABLE `duty_info` (
   `doctor_id` int(11) DEFAULT NULL COMMENT '医生ID',
   `max_booknum` int(11) DEFAULT NULL COMMENT '最大预约数',
   `subject_id` int(11) DEFAULT NULL COMMENT '科室ID',
-  `duty_date` datetime DEFAULT NULL COMMENT '出诊日期',
+  `duty_date` date DEFAULT NULL COMMENT '出诊日期',
   PRIMARY KEY (`duty_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of duty_info
 -- ----------------------------
+INSERT INTO `duty_info` VALUES ('1', '8：00-12：00', '周五', '1', '20', null, '2016-04-01');
+INSERT INTO `duty_info` VALUES ('2', '8：00-12：00', '周五', '3', '20', null, '2016-04-01');
+INSERT INTO `duty_info` VALUES ('3', '8：00-12：00', '周六', '3', '20', null, '2016-04-02');
+INSERT INTO `duty_info` VALUES ('4', '8：00-12：00', '周五', '4', '20', null, '2016-04-01');
+INSERT INTO `duty_info` VALUES ('5', '8：00-12：00', '周五', '4', '20', null, '2016-04-01');
+INSERT INTO `duty_info` VALUES ('6', '8：00-12：00', '周五', '4', '20', null, '2016-04-01');
+INSERT INTO `duty_info` VALUES ('7', '8：00-12：00', '周五', '5', '20', null, '2016-04-01');
+INSERT INTO `duty_info` VALUES ('8', '8：00-12：00', '周五', '6', '20', null, '2016-04-01');
+INSERT INTO `duty_info` VALUES ('9', '8：00-12：00', '周五', '7', '20', null, '2016-04-01');
+INSERT INTO `duty_info` VALUES ('10', '8：00-12：00', '周五', '8', '20', null, '2016-04-01');
+INSERT INTO `duty_info` VALUES ('11', '8：00-12：00', '周五', '9', '20', null, '2016-04-01');
+INSERT INTO `duty_info` VALUES ('12', '8：00-12：00', '周五', '10', '20', null, '2016-04-01');
+INSERT INTO `duty_info` VALUES ('13', '8：00-12：00', '周五', '11', '20', null, '2016-04-01');
 
 -- ----------------------------
 -- Table structure for menu
