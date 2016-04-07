@@ -9,68 +9,19 @@
 		<result property="userName" column="user_Name"/>
 		<result property="sex" column="sex"/>
 		<result property="account" column="account"/>
-		<result property="birthday" column="birthday"/>
 		<result property="idCard" column="id_card"/>
 		<result property="relationway" column="relationway"/>
 		<result property="address" column="address"/>
 		<result property="userType" column="user_type"/>
 		<result property="userRegister" column="user_register"/>
-		<result property="email" column="email"/>
+		<result property="password" column="password"/>
 	</resultMap>
-	<!-- <resultMap type="User" id="userWithAddress">
-		<constructor>
-			<idArg column="userid" javaType="long" />
-			<arg column="name" javaType="string" />
-			<arg column="age" javaType="int" />
-			<arg column="phone" javaType="string" />
-			<arg column="passwd" javaType="string" />
-		</constructor>
-		<collection property="addrs" javaType="arraylist" ofType="Address"
-			column="ownerid" resultMap="addr"/>
-	</resultMap> -->
-	
-	<!--<resultMap type="User" id="user">
-		<id column="uid" javaType="long" />
-		<result column="name" javaType="string" />
-		<result column="age" javaType="int" />
-		<result column="phone" javaType="string" />
-		<result column="passwd" javaType="string" />
-	</resultMap>-->
 
-	<!-- <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="uid">
-		insert into foo.user(name,age,phone,passwd) values(#{name},#{age},#{phone},#{passwd});
-	</insert>
-	<delete id="deleteUser" parameterType="long">
-		delete from foo.user where uid = #{uid}
-	</delete>
-	<update id="updateUser" parameterType="User">
-		update foo.user set 
-		<trim suffixOverrides=",">鍘婚櫎鐢熸垚鐨凷QL璇彞鍚庨潰鐨?,"
-			<if test="name!=null">name=#{name}, </if>
-			<if test="phone!=null">phone=#{phone}, </if>
-			<if test="age!=null">age=#{age}, </if>
-			<if test="passwd!=null">passwd=#{passwd}</if>
-		</trim>
-		<where>userid=#{uid}</where>
-	</update>
-	
-	<select id="getAllUser" resultMap="userWithAddress" parameterType="map">
-		select <include refid="userColumn"/> , <include refid="addrColumn"/>
-		from userinfo u left join address a 
-		on u.userid = a.ownerid
-		
-	</select>
-	<select id="getUser" resultMap="userWithAddress" parameterType="long">
-		select <include refid="userColumn"/>,<include refid="addrColumn"/> from userinfo u
-		left outer join foo.address a on u.userid = a.ownerid
-		<where>u.userid=#{uid}</where>
-	</select>
-	 -->
 	<!--添加用户-->
 	<insert id="insertUserInfo" parameterType="UserInfo">
-	insert into user_info(user_id,user_Name,account,password,Sex,birthday,id_card,relationway,address,user_type,user_register) 
+	insert into user_info(user_id,user_Name,account,password,Sex,id_card,relationway,address,user_type,user_register) 
 	
-	values(#{userId},#{userName},#{account},#{password},#{sex},#{birthday},#{idCard},#{relationway},#{address},#{userType},NOW())	
+	values(#{userId},#{userName},#{account},#{password},#{sex},#{idCard},#{relationway},#{address},#{userType},NOW())	
 	</insert>
 	<!--查询用户和账号信息-->
 	<select id="getUserInfo" resultMap="userinfo" parameterType="string">
@@ -78,7 +29,6 @@
 			u.user_id,
 			u.user_name,
 			u.sex,
-			u.birthday,
 			u.account,
 			u.`password`,
 			u.id_card,
@@ -90,33 +40,46 @@
 		<where>u.account=#{account}</where>
 	
 	</select>
+	<!--查询用户和账号信息-->
+	<select id="getUserId" resultMap="userinfo" parameterType="UserInfo">
+		SELECT
+			u.user_id,
+			u.user_name,
+			u.sex,
+			u.account,
+			u.`password`,
+			u.id_card,
+			u.relationway,
+			u.user_type,
+			u.address,
+			u.user_register
+			from user_info u
+		<where>
+				<if test="userId !=null and userId !=''">
+					u.user_Id=#{userId}
+				</if>
+			</where>  
 	
-	<!--查询机构下面的用户-->
-	<select id="getPageUserInfo" resultMap="userinfo" parameterType="Page">
-			select u.user_id,
-		       u.user_name,
-		       u.user_sex,
-		       u.user_birthday,
-		       u.user_recruitment,
-		       u.user_newaddress,
-		       u.user_education,
-		       u.user_state,
-		       u.user_register,
-		       u.user_number,
-		       u.user_email,
-		       u.user_urgentnumber
-		  from user_info u, s_userdepartment d
-		 where d.leveldepartment like #{params.departmentId} || '%'
 	</select>
-	
+	<!-- 修改 -->
+	<update id="updateUserInfo" parameterType="UserInfo">
+		update user_info set 
+		<trim suffixOverrides=",">
+			<if test="userName">user_name=#{userName},</if>
+			<if test="sex">sex=#{sex},</if>
+			<if test="account!=null">account=#{account},</if>
+			<if test="idCard!=null">id_card=#{idCard},</if>
+			<if test="relationway!=null">relationway=#{relationway},</if>
+			<if test="address!=null">address=#{address},</if>
+			<if test="userType!=null">user_type=#{userType},</if>
+			<if test="userRegister!=null">user_register=#{userRegister},</if>
+			<if test="password!=null">password=#{password},</if>
+		</trim>
+		<where>user_id=#{userId}</where>
+	</update>
 	
 </mapper>
-
-
-
-
-
-
+	
 
 
 

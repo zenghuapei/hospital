@@ -29,37 +29,37 @@
 						<tr >
 							  <td style="width: 200px;text-align: right;"><h4>预约时间：</h4></td>
 							  <td style="line-height: 40px">
-							  	<fmt:formatDate value="${requestScope.booking.booknow }" type="date"/>
+							  	<fmt:formatDate value="${requestScope.book.booknow }" type="date"/>
 							  </td>
 						</tr> 
 						<tr >
 							  <td style="width: 200px;text-align: right;"><h4>姓名：</h4></td>
 							  <td style="line-height: 40px">
-							  	  	${requestScope.booking.bookName }
+							  	  	${requestScope.book.bookName }
 							  </td>
 						</tr> 
 						<tr >
 							  <td style="width: 200px;text-align: right;"><h4>地址：</h4></td>
 							  <td style="line-height: 40px">
-							  	  	${requestScope.booking.bookAddress }
+							  	  	${requestScope.book.bookAddress }
 							  </td>
 						</tr> 
 						<tr >
 							  <td style="width: 200px;text-align: right;"><h4>手机号：</h4></td>
 							  <td style="line-height: 40px">
-							  	  	${requestScope.booking.bookNum }
+							  	  	${requestScope.book.bookNum }
 							  </td>
 						</tr> 
 						<tr >
 							  <td style="width: 200px;text-align: right;"><h4>身份证号：</h4></td>
 							  <td style="line-height: 40px">
-							  	  	${requestScope.booking.bookIdCard }
+							  	  	${requestScope.book.bookIdCard }
 							  </td>
 						</tr> 
 						<tr >
 							  <td style="width: 200px;text-align: right;"><h4>预约状态：</h4></td>
 							  <td style="line-height: 40px">
-							  	  	${requestScope.booking.bookingState }
+							  	  	${requestScope.book.bookingState }
 							  </td>
 						</tr> 
 		 		</table>

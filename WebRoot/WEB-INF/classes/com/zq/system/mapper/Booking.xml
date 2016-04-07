@@ -6,16 +6,46 @@
 	<resultMap type="Booking" id="booking">
 		<result property="bookingId" column="booking_id"/>
 		<result property="bookingState" column="booking_state"/>
-		<result property="bookingTime" column="booking_time"/>
 		<result property="booknow" column="booknow"/>
 		<result property="doctorId" column="doctor_id"/>
 		<result property="userId" column="user_id"/>
+		<result property="bookName" column="book_name"/>
+		<result property="bookIdCard" column="book_idCard"/>
+		<result property="bookNum" column="book_num"/>
+		<result property="bookAddress" column="book_address"/>
 	</resultMap>
 	<!-- 查询预约信息 -->
 	<select id="getBookingList" resultMap="booking" parameterType="Booking">
-		select booking_id,boking_state,booking_time,booknow,doctor_id,user_id from booking
+		SELECT
+			booking.booking_id,
+			booking.booking_state,
+			booking.booknow,
+			booking.doctor_id,
+			booking.user_id,
+			booking.book_name,
+			booking.book_idCard,
+			booking.book_num,
+			booking.book_address
+			FROM
+			booking 
+			<where>
+				<if test="bookIdCard !=null and bookIdCard !=''">
+					booking.book_idCard=#{bookIdCard}
+				</if>
+				<if test="bookName !=null and bookName !=''">
+					and booking.book_name=#{bookName}
+				</if>
+				<if test="bookingState !=null and bookingState !=''">
+					and booking_state=#{bookingState}
+				</if>
+				<if test="bookingId !=null and bookingId !=''">
+					and booking.booking_id=#{bookingId}
+				</if>
+			</where>  
 	</select>
-	
+	<select id="getBookCount" parameterType="Booking" resultType="int">
+		select count(*) from booking where  date_format(booknow,'%Y-%m-%d') =DATE_FORMAT(#{booknow},'%Y-%m-%d') and doctor_id=#{doctorId} and booking_state=#{bookingState}
+	</select>
 	<!-- 添加预约信息 -->
 	<insert id="addBooking" parameterType="Booking">
 		insert into booking
@@ -43,6 +73,23 @@
 		</trim>
 		)
 	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateBooking" parameterType="Booking">
+		update booking set 
+		<trim suffixOverrides=",">
+			<if test="bookingState!=null">booking_state=#{bookingState},</if>
+			<if test="booknow!=null">booknow=#{booknow},</if>
+			<if test="doctorId!=null">doctorId=#{doctorId},</if>
+			<if test="userId!=null">user_id=#{userId},</if>
+			<if test="bookName!=null">book_name=#{bookName},</if>
+			<if test="bookIdCard!=null">book_idCard=#{bookIdCard},</if>
+			<if test="bookNum!=null">book_num=#{bookNum},</if>
+			<if test="bookAddress!=null">book_address=#{bookAddress},</if>
+		</trim>
+		<where>booking_Id=#{bookingId}</where>
+	</update>
+	
 </mapper>
 
 

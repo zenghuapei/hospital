@@ -41,7 +41,7 @@
         <div class="mini-splitter" style="width:100%;height:100%;" borderStyle="border:0;">
             <div size="180" maxSize="250" minSize="100" showCollapseButton="true" style="border:0;">
                 <!--OutlookTree-->
-                <div id="leftTree" class="mini-outlooktree" url="${pageContext.request.contextPath}/role/roleUserMenu.do" onnodeclick="onNodeSelect"
+                <div id="leftTree" class="mini-outlooktree" url="${pageContext.request.contextPath}/menu/querymenuList.do" onnodeclick="onNodeSelect"
                     textField="menuName" idField="menuId" parentField="parentId"                      
                 >
                 </div>

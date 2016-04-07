@@ -30,25 +30,17 @@ function reloadVerifyCode(){
             <tr>
                 <td style="width:60px;"><label for="username$text">帐号：</label></td>
                 <td colspan="2">
-                    <input id="username" name="username" onvalidation="onUserNameValidation" class="mini-textbox" required="true" style="width:150px;"/>
+                    <input id="username" name="account" onvalidation="onUserNameValidation" class="mini-textbox" required="true" style="width:150px;"/>
                 </td>    
             </tr>
             <tr>
                 <td style="width:60px;"><label for="pwd$text">密码：</label></td>
                 <td colspan="2">
-                    <input id="password" name="password" onvalidation="onPwdValidation" class="mini-password" requiredErrorText="密码不能为空" required="true" style="width:150px;" onenter="onLoginClick"/>
-                    &nbsp;&nbsp;<a href="#" >忘记密码?</a>
-                </td>
-            </tr>
-            <tr>
-                <td style="width:60px;"><label for="pwd$text">验证码：</label></td>
-                <td>
-                	
-                    <input id="verifyCode" name="verifyCode" onvalidation="onverifyCode" class="mini-textbox" requiredErrorText="验证码不能为空" required="true" style="width:120px;" onenter="onLoginClick"/>
+                    <input id="password" name="password" onvalidation="onPwdValidation" class="mini-password" requiredErrorText="" required="true" style="width:150px;" onenter="onLoginClick"/>
                     &nbsp;&nbsp;
                 </td>
-                <td><img id="verifyCodeImage" style=" border:3 dashed #990000" onclick="reloadVerifyCode()" src="./getVerifyCodeImage.do"/><br/> </td>
-            </tr>               
+            </tr>
+                         
             <tr>
                 <td></td>
                 <td style="padding-top:5px;">
@@ -76,12 +68,9 @@ function reloadVerifyCode(){
             	return;
             }else{
             	var params = getSubmitParams("input");
-				var params1 = {data:$.toJSON(params)}; 
-            	/* $.ajax({ url: "${pageContext.request.contextPath}/login.do", context: form..submit(), success: function(data){
-   					alert(data);
-				}}); */
+				var params1 = {data:$.toJSON(params)};          
 				$.ajax( {    
-				    url:'./login.do',// 跳转到 action    
+				    url:'${pageContext.request.contextPath}/loginAdmin.do',// 跳转到 action    
 				    data:params1,    
 				    type:'post',    
 				    cache:false,    

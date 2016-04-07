@@ -15,11 +15,21 @@ public class BookingServiceImpl implements BookingService {
 
 	public List<Booking> getBookingList(Booking booking) {
 		
-		return null;
+		return bookingDao.getBookingList(booking);
 	}
 
 	public Integer addBooking(Booking booking) {
 		return bookingDao.addBooking(booking);
+	}
+
+	public Integer updateBooking(Booking booking) {
+		
+		return bookingDao.updateBooking(booking);
+	}
+
+	public Integer getBookCount(Booking booking) {
+		
+		return bookingDao.getBookCount(booking);
 	}
 
 }

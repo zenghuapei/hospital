@@ -32,4 +32,8 @@ public class DutyInfoServiceImpl implements DutyInfoService {
 		return null;
 	}
 
+	public DutyInfo getDutyInfo(DutyInfo dutyInfo) {
+		return dutyInfoDao.getDutyInfo(dutyInfo);
+	}
+
 }

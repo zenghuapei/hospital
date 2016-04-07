@@ -34,10 +34,9 @@ public class MenuController extends BaseController{
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/querymenuList", method=RequestMethod.POST)
+	@RequestMapping(value="/querymenuList", method=RequestMethod.GET)
 	@ResponseBody
 	public Object querymenuList(HttpServletRequest request) throws Exception{
-		Dto dto=WebUtil.getParamAsDto(request);
 		List<Menu> menuList = menuService.getAllMenuList();
 		return menuList;
 	}

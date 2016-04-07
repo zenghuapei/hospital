@@ -20,4 +20,11 @@ public interface DutyInfoService {
 	 * @return
 	 */
 	public Integer addDutyInfo(DutyInfo dutyInfo);
+	/**
+	 * 
+	 * 查询预约信息
+	 * @param dutyInfo
+	 * @return
+	 */
+	public DutyInfo getDutyInfo(DutyInfo dutyInfo);
 }

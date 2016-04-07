@@ -20,6 +20,7 @@
 	    <typeAlias type="com.zq.system.entity.DoctorInfo" alias="DoctorInfo"/>	
 	    <typeAlias type="com.zq.system.entity.Subject" alias="Subject"/>	
 	    <typeAlias type="com.zq.system.entity.DutyInfo" alias="DutyInfo"/>	
+	    <typeAlias type="com.zq.system.entity.UserAdmin" alias="UserAdmin"/>	
 	    <typeAlias type="com.zq.common.page.Page" alias="Page"/>	
 	</typeAliases>
 	
@@ -36,6 +37,7 @@
 		<mapper resource="com/zq/system/mapper/DoctorInfo.xml"/>
 		<mapper resource="com/zq/system/mapper/Subject.xml"/>
 		<mapper resource="com/zq/system/mapper/DutyInfo.xml"/>
+		<mapper resource="com/zq/system/mapper/UserAdmin.xml"/>
 	</mappers>
 	
 </configuration>

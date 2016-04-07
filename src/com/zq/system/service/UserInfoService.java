@@ -16,7 +16,7 @@ public interface UserInfoService {
 	 * 删除用户
 	 * @param uid
 	 */
-	public void deleteUserInfo(Long uid);
+	public void deleteUserInfo(UserInfo userInfo);
 	/**
 	 * 修改用户
 	 * @param userInfo
@@ -30,14 +30,15 @@ public interface UserInfoService {
 	 */
 	public List<UserInfo> getPageUserInfo(Page page);
 	/**
-	 * @param likeCondition
-	 * @return
-	 */
-	public List<UserInfo> getUserNeeded(Map<String, Object> likeCondition);
-	/**
 	 * 根据账号查询用户
 	 * @param account
 	 * @return
 	 */
 	public UserInfo getOneUserInfo(String account);
+	/**
+	 * 主键查询
+	 * @param userInfo
+	 * @return
+	 */
+	public UserInfo getUserId(UserInfo userInfo);
 }

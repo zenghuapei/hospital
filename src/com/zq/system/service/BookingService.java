@@ -21,4 +21,16 @@ public interface BookingService {
 	 * @return
 	 */
 	public Integer addBooking(Booking booking);
+	/**
+	 * 修改预约挂号
+	 * @param menu
+	 * @return
+	 */
+	public Integer updateBooking(Booking booking);
+	/**
+	 * 查询预约数
+	 * @param booking
+	 * @return
+	 */
+	public Integer getBookCount(Booking booking);
 }

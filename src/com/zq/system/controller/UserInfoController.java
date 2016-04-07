@@ -22,6 +22,7 @@ import com.zq.common.page.Page;
 import com.zq.common.util.WebUtil;
 import com.zq.system.entity.UserInfo;
 import com.zq.system.service.UserInfoService;
+import com.zq.system.util.CommonConstants;
 
 @Controller("UserInfoController")
 @RequestMapping("userInfo")
@@ -33,27 +34,51 @@ public class UserInfoController  extends BaseController{
 	
 	/**
 	 * 
-	 * 根据部门Id查询用户信息
+	 * 根据Id查询用户信息
 	 * @param request
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="/queryPage", method=RequestMethod.POST)
-	@ResponseBody
-	public Object queryPage(HttpServletRequest request) throws Exception{
-		Dto dto=WebUtil.getParamAsDto(request);
-		Page<UserInfo> page =this.getPage(dto);
-		Map params = new HashMap();
-		params.put("departmentId",dto.get("departmentId"));
-		page.setParams(params);
-		List<UserInfo> user = userInfoService.getPageUserInfo(page);
-	    page.setData(user);
-		System.out.println("");
-		return page;
+	@RequestMapping(value="/queryUserInfo", method=RequestMethod.POST)
+	public Object queryUserInfo(HttpServletRequest request,UserInfo userInfo) throws Exception{
+		
+		return "";
 	}
 	/**
 	 * 
-	 * 根据部门Id查询用户信息
+	 * 修改用户信息
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/updateUserInfo", method=RequestMethod.POST)
+	public Object updateUserInfo(HttpServletRequest request,UserInfo userInfo) throws Exception{
+		userInfoService.updateUserInfo(userInfo);
+		UserInfo user = userInfoService.getUserId(userInfo);
+		request.getSession().setAttribute(CommonConstants.SEESION_MEMBER, user);
+		return "hospital/updateUser";
+	}
+	/**
+	 * 
+	 * 修改密码信息
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/updatePassword", method=RequestMethod.POST)
+	public Object updatePassword(HttpServletRequest request,UserInfo userInfo) throws Exception{
+		UserInfo user =(UserInfo) request.getSession().getAttribute(CommonConstants.SEESION_MEMBER);
+		if(user.getPassword().equals(userInfo.getYpassWord())){
+			userInfoService.updateUserInfo(userInfo);
+		}else{
+			request.setAttribute("message", "原密码错误！");
+			return "hospital/updatePassword";
+		}
+		return "../login1";
+	}
+	/**
+	 * 
+	 *添加信息
 	 * @param request
 	 * @return
 	 * @throws Exception

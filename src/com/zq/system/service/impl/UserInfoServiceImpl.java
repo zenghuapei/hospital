@@ -20,13 +20,13 @@ public class UserInfoServiceImpl implements UserInfoService{
 		userInfoDao.insertUserInfo(userInfo);
 	}
 
-	public void deleteUserInfo(Long uid) {
-		// TODO Auto-generated method stub
+	public void deleteUserInfo(UserInfo userInfo) {
+		userInfoDao.deleteUserInfo(userInfo);
 		
 	}
 
 	public void updateUserInfo(UserInfo userInfo) {
-		// TODO Auto-generated method stub
+		userInfoDao.updateUserInfo(userInfo);
 		
 	}
 
@@ -34,14 +34,14 @@ public class UserInfoServiceImpl implements UserInfoService{
 		
 		return userInfoDao.getPageUserInfo(page);
 	}
-
-	public List<UserInfo> getUserNeeded(Map<String, Object> likeCondition) {
-		userInfoDao.getAllUserInfo(likeCondition);
-		return null;
-	}
 	public UserInfo getOneUserInfo(String account) {
 		
 		return userInfoDao.getUserInfo(account);
+	}
+
+	public UserInfo getUserId(UserInfo userInfo) {
+		
+		return userInfoDao.getUserId(userInfo);
 	}
 	
 	

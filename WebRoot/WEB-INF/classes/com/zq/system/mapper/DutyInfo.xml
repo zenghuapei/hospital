@@ -27,6 +27,24 @@
 			duty_info where doctor_id=#{doctorId}
 		
 	</select>
+	<select id="getDutyInfo" resultMap="dutyInfo" parameterType="DutyInfo">
+		SELECT
+			duty_info.duty_id,
+			duty_info.duty_time,
+			duty_info.duty_interval,
+			duty_info.doctor_id,
+			duty_info.max_booknum,
+			duty_info.subject_id,
+			duty_info.duty_date
+			FROM
+			duty_info 
+			<where>
+				<if test="dutyId !=null and dutyId !=''">
+					duty_id=#{dutyId}
+				</if>
+			</where>
+		
+	</select>
 </mapper>
 
 

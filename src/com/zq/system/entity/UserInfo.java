@@ -22,14 +22,12 @@ public class UserInfo {
 	 * 用户名
 	 */
 	private String account;
-	/**
-	 * 生日
-	 */
-	private Date birthday;
+	
 	/**
 	 * 密码
 	 */
 	private String password;
+	private String ypassWord;
 	/**
 	 * 用户性别
 	 */
@@ -76,14 +74,7 @@ public class UserInfo {
 	public void setUserRegister(Date userRegister) {
 		this.userRegister = userRegister;
 	}
-	@JsonSerialize(using = DateSerializer.class)
-	public Date getBirthday() {
-		return birthday;
-	}
-	@JsonSerialize(using = DateSerializer.class)
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+	
 	public String getAccount() {
 		return account;
 	}
@@ -125,6 +116,12 @@ public class UserInfo {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getYpassWord() {
+		return ypassWord;
+	}
+	public void setYpassWord(String ypassWord) {
+		this.ypassWord = ypassWord;
 	}
 	
 	

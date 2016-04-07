@@ -18,7 +18,7 @@
  <script src="${pageContext.request.contextPath}/scripts/boot.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>值班时间安排</title>
+<title>预约信息</title>
 </head>
 <body>
 <div class="container">
@@ -26,27 +26,31 @@
  <div id="main" style="width: 100%;overflow:hidden;margin-top: 20px">
  	 <div style="margin-top: 50px">
 				<table  class="table table-bordered" style="width: 70%;margin: 0 auto;" >
-						<tr >
-							  <td style="width: 250px;text-align: right;"><h3>${requestScope.doctorInfo.doctorName }：<h3></td>
-								  <td style="font-size: 15px" colspan="4">
-								  	${requestScope.doctorInfo.doctorBrief }
-								  </td >
-									
-						</tr> 
 						<tr>
-							<td>出诊时间</td>
-							<td>值班时间</td>
-							<td>值班时间段</td>
-							<td>预约总数</td>
+							<td>预约时间</td>
+							<td>姓名</td>
+							<td>地址</td>
+							<td>手机号</td>
+							<td>身份证号</td>
+							<td>预约状态</td>
 							<td>操作</td>
 						</tr>
-						<c:forEach items="${requestScope.doctorInfo.dutyInfoList}" var="dutyInfoList">
+						<c:forEach items="${requestScope.bookingList}" var="bookingList">
 							<tr>
-								<td><fmt:formatDate value="${dutyInfoList.dutyDate }" type="date"/></td>
-								<td>${dutyInfoList.dutyTime }</td>
-								<td>${dutyInfoList.dutyInterval }</td>
-								<td>${dutyInfoList.maxBookNum }</td>
-								<td><a href="${pageContext.request.contextPath}/booking/jumbBooking.do?dutyId=${dutyInfoList.dutyId}">预约</a></td>
+								<td><fmt:formatDate value="${bookingList.booknow }" type="date"/></td>
+								<td>${bookingList.bookName }</td>
+								<td>${bookingList.bookAddress }</td>
+								<td>${bookingList.bookNum }</td>
+								<td>${bookingList.bookIdCard }</td>
+								<td>${bookingList.bookingState }</td>
+								<c:choose>
+									<c:when test="${bookingList.bookingState =='预约成功' }">
+										<td><a href="${pageContext.request.contextPath}/booking/updateBooking.do?bookingId=${bookingList.bookingId}">取消预约</a></td>
+									</c:when>
+									<c:otherwise>
+										<td></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 		 		</table>

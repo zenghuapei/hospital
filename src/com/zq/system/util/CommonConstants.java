@@ -2,6 +2,7 @@ package com.zq.system.util;
 
 public class CommonConstants {
 	 public final static String SEESION_MEMBER = "currentUser";
+	 public final static String SEESION_MEMBER_ADMIN = "currentUserAdmin";
 	    //验证码访问连接
 	    public final static String VERIFYCODE_URL = "getVerifyCodeImage.do";
 	    //登录

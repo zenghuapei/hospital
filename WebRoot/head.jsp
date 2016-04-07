@@ -21,11 +21,11 @@
 		<h3>
 		<c:choose>
 		   <c:when test="${sessionScope.currentUser== null}">  
-		     	<a href="login1.jsp" class="button button-uppercase button-primary">登陆</a>
-				<a href="register.jsp" class="button button-uppercase button-primary">注册</a>    
+		     	<a href="${pageContext.request.contextPath}/login1.jsp" class="button button-uppercase button-primary">登陆</a>
+				<a href="${pageContext.request.contextPath}/register.jsp" class="button button-uppercase button-primary">注册</a>    
 		   </c:when>
 		   <c:otherwise> 
-				  欢迎：<a>${sessionScope.currentUser.userName}</a> <a href="./logout.do">退出</a>
+				  欢迎：<a href="${pageContext.request.contextPath}/view/hospital/updateUser.jsp">${sessionScope.currentUser.userName}</a> <a href="${pageContext.request.contextPath}/logout.do">退出</a>
 		   </c:otherwise>
 		</c:choose>
 			
@@ -35,9 +35,9 @@
 	        <h1>XX医院网上挂号系统</h1>	        	        	     	        
 	</div>
 	<div class="button-group" style="text-align: center;">
+		<a  class="button button-uppercase button-primary" style="margin-left: 150px" href="${pageContext.request.contextPath}/index.jsp">首页</a>
 	    <a  class="button button-uppercase button-primary" style="margin-left: 150px" href="${pageContext.request.contextPath}/subject/querySubject.do">网上预约挂号</a>
-	    <a  class="button button-uppercase button-primary" style="margin-left: 150px" href="view/hospatil/makeQuery.jsp">预约挂号查询</a>
-	    <a  class="button button-uppercase button-primary" style="margin-left: 150px" href="view/hospatil/deselectMake.jsp">取消网上预约</a>
+	    <a  class="button button-uppercase button-primary" style="margin-left: 150px" href="${pageContext.request.contextPath}/view/hospital/makeQuery.jsp">预约挂号查询</a>
  	 </div>
 </body>
 </html>

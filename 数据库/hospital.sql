@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2016-04-03 23:13:32
+Date: 2016-04-07 23:07:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,15 +30,14 @@ CREATE TABLE `booking` (
   `book_num` varchar(12) DEFAULT NULL COMMENT '电话',
   `book_address` varchar(100) DEFAULT NULL COMMENT '地址',
   PRIMARY KEY (`booking_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of booking
 -- ----------------------------
-INSERT INTO `booking` VALUES ('1', null, null, '1', null, '电饭锅', '34534534534', '145456456564', null);
-INSERT INTO `booking` VALUES ('2', null, null, '1', null, '士大夫但是', '34543534', '4545656', null);
-INSERT INTO `booking` VALUES ('3', null, null, '1', null, '豆腐干豆腐', '34534543', '453453453', '豆腐干豆腐干');
-INSERT INTO `booking` VALUES ('4', null, '2016-04-03 00:00:00', '1', null, '范甘迪', '353543543', '45345435', '豆腐干地方');
+INSERT INTO `booking` VALUES ('12', '预约成功', '2016-04-04 22:54:47', '1', '36', 'GFFDGDF', '45654645', '345345', 'FDGDFGDF');
+INSERT INTO `booking` VALUES ('13', '预约成功', '2016-04-07 20:22:43', '1', '36', 'gffdhfdghgf', '54645645', '3434535', 'dfsgsdgs');
+INSERT INTO `booking` VALUES ('14', '预约成功', '2016-04-07 20:23:54', '1', '36', 'dfgdsgd', '34545345', 'd2334324', 'fsdfsdfsdfs');
 
 -- ----------------------------
 -- Table structure for doctor_info
@@ -101,7 +100,7 @@ CREATE TABLE `duty_info` (
 -- ----------------------------
 -- Records of duty_info
 -- ----------------------------
-INSERT INTO `duty_info` VALUES ('1', '8：00-12：00', '周五', '1', '20', null, '2016-04-01');
+INSERT INTO `duty_info` VALUES ('1', '8：00-12：00', '周五', '1', '2', null, '2016-04-07');
 INSERT INTO `duty_info` VALUES ('2', '8：00-12：00', '周五', '3', '20', null, '2016-04-01');
 INSERT INTO `duty_info` VALUES ('3', '8：00-12：00', '周六', '3', '20', null, '2016-04-02');
 INSERT INTO `duty_info` VALUES ('4', '8：00-12：00', '周五', '4', '20', null, '2016-04-01');
@@ -167,6 +166,23 @@ INSERT INTO `subject` VALUES ('11', null, '肿瘤生物治疗门诊', '4', '2');
 INSERT INTO `subject` VALUES ('12', null, '静脉置管护理门诊', '4', '2');
 
 -- ----------------------------
+-- Table structure for user_admin
+-- ----------------------------
+DROP TABLE IF EXISTS `user_admin`;
+CREATE TABLE `user_admin` (
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(20) DEFAULT NULL COMMENT '密码',
+  `account` varchar(20) DEFAULT NULL COMMENT '账号',
+  `admin_name` varchar(50) DEFAULT NULL COMMENT '姓名',
+  PRIMARY KEY (`admin_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_admin
+-- ----------------------------
+INSERT INTO `user_admin` VALUES ('1', 'admin', 'admin', 'dfsdf');
+
+-- ----------------------------
 -- Table structure for user_info
 -- ----------------------------
 DROP TABLE IF EXISTS `user_info`;
@@ -176,7 +192,6 @@ CREATE TABLE `user_info` (
   `account` varchar(50) DEFAULT NULL COMMENT '账号',
   `password` varchar(50) DEFAULT NULL COMMENT '密码',
   `sex` varchar(20) DEFAULT NULL COMMENT '性别',
-  `birthday` datetime DEFAULT NULL COMMENT '生日',
   `id_card` varchar(18) DEFAULT NULL COMMENT '身份证号',
   `relationway` varchar(12) DEFAULT NULL COMMENT '联系电话',
   `address` varchar(50) DEFAULT NULL COMMENT '地址',
@@ -188,8 +203,8 @@ CREATE TABLE `user_info` (
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
-INSERT INTO `user_info` VALUES ('56', 'e12345', 'e12345', 'e12345', null, null, null, '15202350451', null, '1', '2016-03-30 21:04:46');
-INSERT INTO `user_info` VALUES ('54', 'd12345', 'd12345', 'd12345', null, null, null, '15202350749', null, '1', null);
-INSERT INTO `user_info` VALUES ('55', 'w12345', 'w12345', 'w12345', null, null, null, '15202350745', null, '1', null);
-INSERT INTO `user_info` VALUES ('35', '张三', 'admin', 'admin', null, null, null, null, null, '2', null);
-INSERT INTO `user_info` VALUES ('36', '123456', '123456', '123456', '男', '2016-03-30 20:42:53', null, '15202350755', '重庆市', '1', '2016-03-30 20:43:50');
+INSERT INTO `user_info` VALUES ('56', 'e12345', 'e12345', 'e12345', null, null, '15202350451', null, '1', '2016-03-30 21:04:46');
+INSERT INTO `user_info` VALUES ('54', 'd12345', 'd12345', 'd12345', null, null, '15202350749', null, '1', null);
+INSERT INTO `user_info` VALUES ('55', 'w12345', 'w12345', 'w12345', null, null, '15202350745', null, '1', null);
+INSERT INTO `user_info` VALUES ('35', '张三', 'admin', 'admin', null, null, null, null, '2', null);
+INSERT INTO `user_info` VALUES ('36', 'dfsdfsd18', '123456', 'q123456', '男', '342342l', '15202dfd25', '重庆市dsfsds5', '1', '2016-03-30 20:43:50');

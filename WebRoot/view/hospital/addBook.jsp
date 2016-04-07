@@ -16,7 +16,7 @@
  <script src="${pageContext.request.contextPath}/scripts/boot.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/scripts/jquery.json-2.3.min.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>用户注册</title>
+<title>预约挂号</title>
 </head>
 <body>
 <div class="container">

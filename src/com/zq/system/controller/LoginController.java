@@ -1,33 +1,32 @@
 package com.zq.system.controller;
 
-import com.zq.common.util.VerifyCodeUtil;
-import com.zq.system.entity.UserInfo;
-import com.zq.system.service.UserInfoService;
-import com.zq.system.util.CommonConstants;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
-import org.apache.shiro.subject.Subject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import com.zq.common.util.VerifyCodeUtil;
+import com.zq.system.entity.UserAdmin;
+import com.zq.system.entity.UserInfo;
+import com.zq.system.service.UserAdminService;
+import com.zq.system.service.UserInfoService;
+import com.zq.system.util.CommonConstants;
   
 
 @Controller("LoginController")   
 public class LoginController {
 	@Autowired
 	private UserInfoService userInfoService;
+	@Autowired
+	private UserAdminService userAdminService;
     /** 
      * 获取验证码图片和文本(验证码文本会保存在HttpSession中) 
      */  
@@ -76,7 +75,32 @@ public class LoginController {
         }
         return message;
     }  
-      
+    
+    /** 
+     * 用户登录 
+     */  
+    @RequestMapping(value="/loginAdmin", method=RequestMethod.POST,produces = "text/html;charset=UTF-8")
+    @ResponseBody
+    public Object loginAdmin(HttpServletRequest request){  
+    	String message="用户名密码错误!";
+    	
+    	
+    	String data = request.getParameter("data");
+    	
+    	JSONObject json = JSONObject.fromObject(data);
+        String username = json.getString("account");  
+        String password = json.getString("password");
+       
+        UserAdmin userInfo = userAdminService.getUserAdmin(username);
+        if(userInfo!=null){
+        	if(password.equals(userInfo.getPassword())){
+        		request.getSession().setAttribute(CommonConstants.SEESION_MEMBER, userInfo);
+        		message="success";
+                return message;
+        	}
+        }
+        return message;
+    }  
       
     /** 
      * 用户登出 

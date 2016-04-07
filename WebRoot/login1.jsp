@@ -20,7 +20,7 @@
  <div class="container">
 	<div id="loginWindow" style="width: 20%;margin: 100px auto;">
 	
-      <form class="form-signin" method="POST" action="./login.do">
+      <form class="form-signin" method="POST" action="${pageContext.request.contextPath}/login.do">
         <h2 class="form-signin-heading">登录</h2>
         <label for="inputAccount" class="sr-only">用户名</label>
         <input type="text" name="account" id="inputAccount" class="form-control" placeholder="用户名" required autofocus>

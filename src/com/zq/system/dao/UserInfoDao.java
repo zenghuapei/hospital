@@ -10,16 +10,21 @@ import com.zq.system.entity.UserInfo;
 
 @Repository
 public interface UserInfoDao {
-	public void insertUserInfo(UserInfo userInfo);
-	public void updateUserInfo(UserInfo userInfo);
-	public void deleteUserInfo(UserInfo userInfo);
 	/**
-	 * 进行模糊查询
-	 * @param likeCondition
-	 * @param page
-	 * @return
+	 * 添加用户
+	 * @param userInfo
 	 */
-	public List<UserInfo> getAllUserInfo(Map<String,Object> likeCondition);
+	public void insertUserInfo(UserInfo userInfo);
+	/**
+	 * 修改用户
+	 * @param userInfo
+	 */
+	public void updateUserInfo(UserInfo userInfo);
+	/**
+	 * 删除用户
+	 * @param userInfo
+	 */
+	public void deleteUserInfo(UserInfo userInfo);
 	/**
 	 * 
 	 * 分页查询
@@ -33,4 +38,11 @@ public interface UserInfoDao {
 	 * @return
 	 */
 	public UserInfo getUserInfo(String account);
+	
+	/**
+	 * 主键查询
+	 * @param userInfo
+	 * @return
+	 */
+	public UserInfo getUserId(UserInfo userInfo);
 }
