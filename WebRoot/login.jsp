@@ -70,7 +70,7 @@ function reloadVerifyCode(){
             	var params = getSubmitParams("input");
 				var params1 = {data:$.toJSON(params)};          
 				$.ajax( {    
-				    url:'${pageContext.request.contextPath}/loginAdmin.do',// 跳转到 action    
+				    url:'./loginAdmin.do',// 跳转到 action    
 				    data:params1,    
 				    type:'post',    
 				    cache:false,    
@@ -81,7 +81,7 @@ function reloadVerifyCode(){
 			            mini.loading("登录成功，马上转到系统...", "登录成功");
 			            setTimeout(function () {
 			                window.location = "./view/index.jsp";
-			            }, 1500); 
+			            }, 500); 
 				            
 				        }else{  
 					       mini.alert(data);

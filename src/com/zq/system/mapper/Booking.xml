@@ -43,6 +43,76 @@
 				</if>
 			</where>  
 	</select>
+	<!-- 查询预约信息 -->
+	<select id="getBooking" resultMap="booking" parameterType="Booking">
+		SELECT
+			booking.booking_id,
+			booking.booking_state,
+			booking.booknow,
+			booking.doctor_id,
+			booking.user_id,
+			booking.book_name,
+			booking.book_idCard,
+			booking.book_num,
+			booking.book_address,
+			booking.book_xuhao
+			FROM
+			booking 
+			<where>
+				<if test="bookingId !=null and bookingId !=''">
+					 booking.booking_id=#{bookingId}
+				</if>
+			</where>  
+	</select>
+	<!-- 查询预约信息 -->
+	<select id="getBookingXuhao" resultType="int" parameterType="Booking">
+			SELECT IFNULL(MAX(book_xuhao),0) from booking booking 
+			<where>
+				<if test="doctorId !=null and doctorId !=''">
+					and booking.doctor_id=#{doctorId}
+				</if>
+				<if test="booknow !=null and booknow !=''">
+					and date_format(booknow,'%Y-%m-%d') =DATE_FORMAT(#{booknow},'%Y-%m-%d')
+				</if>
+			</where>  
+	</select>
+	<select id="getPageBooking" resultMap="booking" parameterType="Page">
+	SELECT
+			booking.booking_id,
+			booking.booking_state,
+			booking.booknow,
+			booking.doctor_id,
+			booking.user_id,
+			booking.book_name,
+			booking.book_idCard,
+			booking.book_num,
+			booking.book_address
+			FROM
+			booking 
+		    <where>
+				<if test="params.bookIdCard !=null and params.bookIdCard !=''">
+					booking.book_idCard like concat('%',#{params.bookIdCard},'%')
+				</if>
+				<if test="params.bookName !=null and params.bookName !=''">
+					and booking.book_name like concat('%',#{params.bookName},'%')
+				</if>
+				<if test="params.bookingState !=null and params.bookingState !=''">
+					and booking_state=#{params.bookingState}
+				</if>
+				<if test="params.bookingId !=null and params.bookingId !=''">
+					and booking.booking_id=#{params.bookingId}
+				</if>
+				<if test="params.bookNum !=null and params.bookNum !=''">
+					and booking.book_num like concat('%',#{params.bookNum},'%')
+				</if>
+				<if test="params.bookAddress !=null and params.bookAddress !=''">
+					and booking.book_address like concat('%',#{params.bookAddress},'%')
+				</if>
+				<if test="params.booknow !=null and params.booknow !=''">
+					and date_format(booknow,'%Y-%m-%d') =DATE_FORMAT(#{params.booknow},'%Y-%m-%d')
+				</if>
+			</where>   
+	</select>
 	<select id="getBookCount" parameterType="Booking" resultType="int">
 		select count(*) from booking where  date_format(booknow,'%Y-%m-%d') =DATE_FORMAT(#{booknow},'%Y-%m-%d') and doctor_id=#{doctorId} and booking_state=#{bookingState}
 	</select>
@@ -86,10 +156,13 @@
 			<if test="bookIdCard!=null">book_idCard=#{bookIdCard},</if>
 			<if test="bookNum!=null">book_num=#{bookNum},</if>
 			<if test="bookAddress!=null">book_address=#{bookAddress},</if>
+			<if test="bookXuhao!=null">book_xuhao=#{bookXuhao},</if>
 		</trim>
 		<where>booking_Id=#{bookingId}</where>
 	</update>
-	
+	<delete id="deleteBooking" parameterType="Booking">
+		delete from booking where booking_id=#{bookingId}
+	</delete>
 </mapper>
 
 

@@ -2,6 +2,9 @@ package com.zq.system.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.zq.common.date.DateSerializer;
+
 
 
 /**
@@ -33,11 +36,18 @@ public class DutyInfo {
 	 * 科室ID
 	 */
 	private Integer subjectId;
-	
+	/**
+	 * 
+	 */
+	private Integer subjectPrentId;
 	/**
 	 * 出诊时间
 	 */
 	private Date dutyDate;
+	/**
+	 * string
+	 */
+	private String dutyDateStr;
 	/**
 	 * 医生信息
 	 */
@@ -78,9 +88,11 @@ public class DutyInfo {
 	public void setSubjectId(Integer subjectId) {
 		this.subjectId = subjectId;
 	}
+	@JsonSerialize(using = DateSerializer.class)
 	public Date getDutyDate() {
 		return dutyDate;
 	}
+	@JsonSerialize(using = DateSerializer.class)
 	public void setDutyDate(Date dutyDate) {
 		this.dutyDate = dutyDate;
 	}
@@ -89,6 +101,18 @@ public class DutyInfo {
 	}
 	public void setDoctorInfo(DoctorInfo doctorInfo) {
 		this.doctorInfo = doctorInfo;
+	}
+	public String getDutyDateStr() {
+		return dutyDateStr;
+	}
+	public void setDutyDateStr(String dutyDateStr) {
+		this.dutyDateStr = dutyDateStr;
+	}
+	public Integer getSubjectPrentId() {
+		return subjectPrentId;
+	}
+	public void setSubjectPrentId(Integer subjectPrentId) {
+		this.subjectPrentId = subjectPrentId;
 	}
 	
 	

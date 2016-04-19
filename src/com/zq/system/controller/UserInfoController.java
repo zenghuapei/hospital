@@ -96,4 +96,35 @@ public class UserInfoController  extends BaseController{
 		request.setAttribute("userInfo", userinfo);
 		return "注册成功";
 	}
+	/**
+	 * 
+	 *分页查询
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/queryPage", method=RequestMethod.POST)
+	@ResponseBody
+	public Object queryPage(HttpServletRequest request,UserInfo userInfo) throws Exception{
+		Dto dto=WebUtil.getParamAsDto(request);
+		Page<UserInfo> page =this.getPage(dto);
+		Map params = new HashMap();
+		params.put("userName", userInfo.getUserName());
+		page.setParams(params);
+		List<UserInfo> user = userInfoService.getPageUserInfo(page);
+	    page.setData(user);
+	    
+	    return page;
+	}
+	/**
+	 * 删除医生信息
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/deleteUserInfo", method=RequestMethod.GET)
+	@ResponseBody
+	public Object deleteUserInfo(HttpServletRequest request,UserInfo userInfo){
+		userInfoService.deleteUserInfo(userInfo);
+		return "seccess";
+	}
 }

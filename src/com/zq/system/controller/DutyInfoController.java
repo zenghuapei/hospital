@@ -1,6 +1,9 @@
 package com.zq.system.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +20,7 @@ import com.zq.common.controller.BaseController;
 import com.zq.common.dto.Dto;
 import com.zq.common.page.Page;
 import com.zq.common.util.WebUtil;
+import com.zq.system.entity.Booking;
 import com.zq.system.entity.DoctorInfo;
 import com.zq.system.entity.DutyInfo;
 import com.zq.system.entity.Menu;
@@ -38,9 +42,15 @@ public class DutyInfoController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value="/addDutyInfo", method=RequestMethod.POST)
+	@ResponseBody
 	public Object addDutyInfo(HttpServletRequest request){
-		
-		return "";
+		String data = request.getParameter("data");
+		JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[]{"yyyy-MM-dd","yyyy-MM-dd HH:mm:ss"}));
+		DutyInfo dutyInfo = (DutyInfo) JSONObject.toBean(JSONObject.fromObject(data), DutyInfo.class);
+		String dutyInterval =  this.getWeekOfDate(dutyInfo.getDutyDate());
+		dutyInfo.setDutyInterval(dutyInterval);
+		dutyInfoService.addDutyInfo(dutyInfo);
+		return "success";
 	}
 	/**
 	 * 查询值班信息
@@ -54,23 +64,76 @@ public class DutyInfoController extends BaseController{
 		return "hospital/makeDuty";
 	}
 	/**
+	 * 查询值班信息
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/queryDutyInfoUpdate", method=RequestMethod.GET)
+	@ResponseBody
+	public Object queryDutyInfoUpdate(HttpServletRequest request,DutyInfo dutyInfo){
+		DutyInfo duty = dutyInfoService.getDutyInfo(dutyInfo);
+		return duty;
+	}
+	/**
+	 * 查询值班信息
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/queryDutyInfoAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public Object queryDutyInfoAjax(HttpServletRequest request,DutyInfo dutyInfo){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		List<DutyInfo> duty = dutyInfoService.getDutyInfoListAjax(dutyInfo);
+		for (int i = 0; i < duty.size(); i++) {
+			DutyInfo info = duty.get(i);
+			info.setDutyDateStr(sdf.format(info.getDutyDate()));
+			duty.set(i, info);
+		}
+		return duty;
+	}
+	/**
 	 * 修改值班信息
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping(value="/updateDutyInfo", method=RequestMethod.POST)
+	@ResponseBody
 	public Object updateDutyInfo(HttpServletRequest request){
-		
-		return "";
+		String data = request.getParameter("data");
+		JSONUtils.getMorpherRegistry().registerMorpher(new DateMorpher(new String[]{"yyyy-MM-dd","yyyy-MM-dd HH:mm:ss"}));
+		DutyInfo dutyInfo = (DutyInfo) JSONObject.toBean(JSONObject.fromObject(data), DutyInfo.class);
+		dutyInfoService.updateDutyInfo(dutyInfo);
+		return "success";
 	}
 	/**
 	 * 删除值班信息
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="/deleteDutyInfo", method=RequestMethod.POST)
-	public Object deleteDutyInfo(HttpServletRequest request){
-		
-		return "";
+	@RequestMapping(value="/deleteDutyInfo", method=RequestMethod.GET)
+	@ResponseBody
+	public Object deleteDutyInfo(HttpServletRequest request,DutyInfo dutyInfo){
+		dutyInfoService.deleteDutyInfo(dutyInfo);
+		return "success";
+	}
+	/**
+	 * 
+	 *分页查询
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/queryPage", method=RequestMethod.POST)
+	@ResponseBody
+	public Object queryPage(HttpServletRequest request,DutyInfo dutyInfo) throws Exception{
+		Dto dto=WebUtil.getParamAsDto(request);
+		Page<DutyInfo> page =this.getPage(dto);
+		Map params = new HashMap();
+		params.put("dutyDate", dutyInfo.getDutyDate());
+		page.setParams(params);
+		List<DutyInfo> doctor = dutyInfoService.getPageDutyInfo(page);
+	    page.setData(doctor);
+	    
+	    return page;
 	}
 }

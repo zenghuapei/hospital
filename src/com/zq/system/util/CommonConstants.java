@@ -7,6 +7,8 @@ public class CommonConstants {
 	    public final static String VERIFYCODE_URL = "getVerifyCodeImage.do";
 	    //登录
 	    public final static String LOGIN_URL = "login.do";
+	  //登录
+	    public final static String LOGINADMIN_URL = "loginAdmin.do";
 	    //是否直接访问jsp
 	    public static final boolean ALLOW_VIEW_JSP = true;
 }

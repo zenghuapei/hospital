@@ -123,7 +123,7 @@ public class OraclePaginationPlugin implements Interceptor {
      */  
     private String getMysqlPageSql(Page<?> page, StringBuffer sqlBuffer) {  
        //计算第一条记录的位置，Mysql中记录的位置是从0开始的。  
-       int offset = (page.getPageIndex() - 1) * page.getPageSize();  
+       int offset = (page.getPageIndex()) * page.getPageSize();  
        sqlBuffer.append(" limit ").append(offset).append(",").append(page.getPageSize());  
        return sqlBuffer.toString();  
     }  
@@ -201,7 +201,7 @@ public class OraclePaginationPlugin implements Interceptor {
      */  
     private String getCountSql(String sql) {  
          
-       return "select count(1) from (" + sql + ")";  
+       return "select count(1) from (" + sql + ") a";  
     }  
      
     /** 

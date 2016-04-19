@@ -33,6 +33,39 @@
 			FROM
 			`subject` WHERE `subject`.parent_Id=#{parentId}
 	</select>
+	<select id="getSubject" resultMap="subject" parameterType="Subject">
+		SELECT
+			`subject`.subject_id,
+			`subject`.subject_describe,
+			`subject`.subject_name,
+			`subject`.parent_id,
+			`subject`.subject_level
+			FROM
+			`subject` 
+			<where>
+				<if test="subjectId!='' and subjectId!=null">
+					subject_Id=#{subjectId}
+				</if>
+			</where>
+	</select>
+	<select id="getPageSubject" resultMap="subject" parameterType="Page">
+			select
+			`subject`.subject_id,
+			`subject`.subject_describe,
+			`subject`.subject_name,
+			`subject`.parent_id,
+			`subject`.subject_level
+			FROM
+			`subject` 
+		    <where>
+				<if test="params.subjectName !=null and params.subjectName !=''">
+					`subject` .subject_name like concat('%',#{params.subjectName},'%')
+				</if>
+				<if test="params.subjectLevel !=null and params.subjectLevel !=''">
+					and `subject` .subject_level !=#{params.subjectLevel}
+				</if>
+			</where>  
+	</select>
 	<!-- 添加 -->
 	<insert id="addSubject" parameterType="Subject">
 		insert into subject
@@ -41,12 +74,14 @@
 			<if test="subjectDescribe!=null">subject_describe,</if>
 			<if test="subjectName!=null">subject_name,</if>
 			<if test="parentId!=null">parent_Id,</if>
+			<if test="subjectLevel!=null">subject_level,</if>
 		</trim>
 		)values(
 		<trim suffixOverrides="," suffix="">
 			<if test="subjectDescribe!=null">#{subjectDescribe},</if>
 			<if test="subjectName!=null">#{subjectName},</if>
 			<if test="parentId!=null">#{parentId},</if>
+			<if test="subjectLevel!=null">#{subjectLevel},</if>
 		</trim>
 		)
 	</insert>
@@ -63,6 +98,7 @@
 	<delete id="deleteSubject" parameterType="Subject">
 		delete from subject where subject_id=#{subjectId}
 	</delete>
+	
 </mapper>
 
 

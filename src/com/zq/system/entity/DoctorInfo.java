@@ -59,7 +59,14 @@ public class DoctorInfo {
 	 * 科室ID
 	 */
 	private Integer subjectId;
-	
+	/**
+	 * 科室类型ID
+	 */
+	private Integer subjectPrentId;
+	/**
+	 * 科室信息
+	 */
+	private Subject subject;
 	/**
 	 * 值班信息表
 	 */
@@ -147,6 +154,19 @@ public class DoctorInfo {
 	}
 	public void setDutyInfoList(List<DutyInfo> dutyInfoList) {
 		this.dutyInfoList = dutyInfoList;
+	}
+	
+	public Integer getSubjectPrentId() {
+		return subjectPrentId;
+	}
+	public void setSubjectPrentId(Integer subjectPrentId) {
+		this.subjectPrentId = subjectPrentId;
+	}
+	public Subject getSubject() {
+		return subject;
+	}
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 	
 	

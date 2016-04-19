@@ -8,52 +8,83 @@
 		<result property="password" column="password"/>
 		<result property="account" column="account"/>
 		<result property="adminName" column="admin_name"/>
+		<result property="adminSex" column="admin_sex"/>
+		<result property="adminRegister" column="admin_register"/>
 	</resultMap>
 		
 	<!-- 查询 根节点-->
-	<select id="getUserAdmin" resultMap="userAdmin" parameterType="string">
+	<select id="getUserAdmin" resultMap="userAdmin" parameterType="UserAdmin">
 		SELECT
 			user_admin.admin_id,
 			user_admin.`password`,
 			user_admin.account,
-			user_admin.admin_name
+			user_admin.admin_name,
+			user_admin.admin_sex,
+			user_admin.admin_register
 			FROM
 			user_admin
 			<where>
-				account=#{account}
+				<if test="account != '' and account !=null">
+					account=#{account}
+				</if>
+				<if test="adminId != '' and adminId !=null">
+					and admin_id=#{adminId}
+				</if>
 			</where>
 
 	</select>
+	<select id="getPageUserAdmin" resultMap="userAdmin" parameterType="Page">
+			select
+			user_admin.admin_id,
+			user_admin.`password`,
+			user_admin.account,
+			user_admin.admin_name,
+			user_admin.admin_sex,
+			user_admin.admin_register
+			FROM
+			user_admin user_admin
+		    <where>
+				<if test="params.adminName !=null and params.adminName !=''">
+					user_admin.admin_name like concat('%',#{params.adminName},'%')
+				</if>
+			</where>  
+	</select>
 	<!-- 添加 -->
-<!-- 	<insert id="addSubject" parameterType="Subject">
-		insert into subject
+ 	<insert id="addUserAdmin" parameterType="UserAdmin">
+		insert into user_admin
 		(
 		<trim suffixOverrides="," suffix="">
-			<if test="subjectDescribe!=null">subject_describe,</if>
-			<if test="subjectName!=null">subject_name,</if>
-			<if test="parentId!=null">parent_Id,</if>
+			<if test="password!=null">password,</if>
+			<if test="account!=null">account,</if>
+			<if test="adminName!=null">admin_Name,</if>
+			<if test="adminSex!=null">admin_sex,</if>
+			<if test="adminRegister!=null">admin_register,</if>
 		</trim>
 		)values(
 		<trim suffixOverrides="," suffix="">
-			<if test="subjectDescribe!=null">#{subjectDescribe},</if>
-			<if test="subjectName!=null">#{subjectName},</if>
-			<if test="parentId!=null">#{parentId},</if>
+			<if test="password!=null">#{password},</if>
+			<if test="account!=null">#{account},</if>
+			<if test="adminName!=null">#{adminName},</if>
+			<if test="adminSex!=null">#{adminSex},</if>
+			<if test="adminRegister!=null">#{adminRegister},</if>
 		</trim>
 		)
 	</insert>
-	修改
-	<update id="updateSubject" parameterType="Subject">
-		update subject set 
+
+	<update id="updateUserAdmin" parameterType="UserAdmin">
+		update user_admin set 
 		<trim suffixOverrides=",">
-			<if test="subjectDescribe!=null">subject_describe=#{subjectDescribe},</if>
-			<if test="subjectName!=null">subject_name=#{subjectName},</if>
-			<if test="parentId!=null">parent_Id=#{parentId},</if>
+			<if test="password!=null">password=#{password},</if>
+			<if test="adminName!=null">admin_Name=#{adminName},</if>
+			<if test="adminSex!=null">admin_sex=#{adminSex},</if>
 		</trim>
-		<where>subject_id=#{subjectId}</where>
+		<where>admin_id=#{adminId}</where>
 	</update>
-	<delete id="deleteSubject" parameterType="Subject">
-		delete from subject where subject_id=#{subjectId}
-	</delete> -->
+	
+	<delete id="deleteUserAdmin" parameterType="UserAdmin">
+		delete from User_admin where admin_id=#{adminId}
+	</delete> 
+	
 </mapper>
 
 

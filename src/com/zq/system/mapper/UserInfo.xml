@@ -77,7 +77,28 @@
 		</trim>
 		<where>user_id=#{userId}</where>
 	</update>
-	
+	<select id="getPageUserInfo" resultMap="userinfo" parameterType="Page">
+			select
+			u.user_id,
+			u.user_name,
+			u.sex,
+			u.account,
+			u.`password`,
+			u.id_card,
+			u.relationway,
+			u.user_type,
+			u.address,
+			u.user_register
+			from user_info u
+		    <where>
+				<if test="params.userName !=null and params.userName !=''">
+					u.user_name like concat('%',#{params.userName},'%')
+				</if>
+			</where>  
+	</select>
+	<delete id="deleteUserInfo" parameterType="UserInfo">
+		delete from user_info where user_id=#{userId}
+	</delete>
 </mapper>
 	
 

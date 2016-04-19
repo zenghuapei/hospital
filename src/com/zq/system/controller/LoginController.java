@@ -61,11 +61,7 @@ public class LoginController {
         if(userInfo!=null){
         	if(password.equals(userInfo.getPassword())){
         		request.getSession().setAttribute(CommonConstants.SEESION_MEMBER, userInfo);
-        		if(2==userInfo.getUserType()){
-        			message="index";
-        		}else{
         			message="../index";
-        		}
                 return message;
         	}else{
         		request.setAttribute("message_login", "用户名或密码不正确");  
@@ -90,11 +86,12 @@ public class LoginController {
     	JSONObject json = JSONObject.fromObject(data);
         String username = json.getString("account");  
         String password = json.getString("password");
-       
-        UserAdmin userInfo = userAdminService.getUserAdmin(username);
+        UserAdmin user = new UserAdmin();
+        user.setAccount(username);
+        UserAdmin userInfo = userAdminService.getUserAdmin(user);
         if(userInfo!=null){
         	if(password.equals(userInfo.getPassword())){
-        		request.getSession().setAttribute(CommonConstants.SEESION_MEMBER, userInfo);
+        		request.getSession().setAttribute(CommonConstants.SEESION_MEMBER_ADMIN, userInfo);
         		message="success";
                 return message;
         	}

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zq.common.page.Page;
 import com.zq.system.dao.BookingDao;
 import com.zq.system.dao.DoctorInfoDao;
 import com.zq.system.dao.DutyInfoDao;
@@ -28,12 +29,28 @@ public class DutyInfoServiceImpl implements DutyInfoService {
 	}
 
 	public Integer addDutyInfo(DutyInfo dutyInfo) {
-		// TODO Auto-generated method stub
-		return null;
+		return dutyInfoDao.addDutyInfo(dutyInfo);
 	}
 
 	public DutyInfo getDutyInfo(DutyInfo dutyInfo) {
 		return dutyInfoDao.getDutyInfo(dutyInfo);
+	}
+
+	public List<DutyInfo> getDutyInfoListAjax(DutyInfo dutyInfo) {
+		return dutyInfoDao.getDutyInfoList(dutyInfo);
+	}
+
+	public List<DutyInfo> getPageDutyInfo(Page page) {
+		return dutyInfoDao.getPageDutyInfo(page);
+	}
+
+	public void deleteDutyInfo(DutyInfo dutyInfo) {
+		dutyInfoDao.deleteDutyInfo(dutyInfo);
+		
+	}
+
+	public void updateDutyInfo(DutyInfo dutyInfo) {
+		dutyInfoDao.updateDutyInfo(dutyInfo);
 	}
 
 }

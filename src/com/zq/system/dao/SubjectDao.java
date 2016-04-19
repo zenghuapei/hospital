@@ -40,4 +40,17 @@ public interface SubjectDao {
 	 * @return
 	 */
 	public Integer deleteSubject(Subject subject);
+	
+	/**
+	 * 查询单条
+	 * @param subject
+	 * @return
+	 */
+	public Subject getSubject(Subject subject);
+	 /**
+	  * 查询分页信息
+	 * @param page
+	 * @return
+	 */
+	public List<Subject> getPageSubject(Page page);
 }

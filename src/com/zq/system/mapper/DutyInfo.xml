@@ -11,6 +11,8 @@
 		<result property="maxBookNum" column="max_BookNum"/>
 		<result property="subjectId" column="subject_Id"/>
 		<result property="dutyDate" column="duty_Date"/>
+		<result property="subjectId" column="subject_id"/>
+		<result property="subjectPrentId" column="subject_prentid"/>
 	</resultMap>
 	
 	
@@ -22,10 +24,29 @@
 			duty_info.doctor_id,
 			duty_info.max_booknum,
 			duty_info.subject_id,
-			duty_info.duty_date
+			duty_info.duty_date,
+			duty_info.subject_prentId
 			FROM
 			duty_info where doctor_id=#{doctorId}
 		
+	</select>
+	<select id="getPageDutyInfo" resultMap="dutyInfo" parameterType="Page">
+			SELECT
+			duty_info.duty_id,
+			duty_info.duty_time,
+			duty_info.duty_interval,
+			duty_info.doctor_id,
+			duty_info.max_booknum,
+			duty_info.subject_id,
+			duty_info.duty_date,
+			duty_info.subject_prentId
+			FROM
+			duty_info duty_info
+		    <where>
+				<if test="params.dutyDate !=null and params.dutyDate !=''">
+					date_format(params.dutyDate,'%Y-%m-%d') =DATE_FORMAT(#{params.dutyDate},'%Y-%m-%d')
+				</if>
+			</where>  
 	</select>
 	<select id="getDutyInfo" resultMap="dutyInfo" parameterType="DutyInfo">
 		SELECT
@@ -35,7 +56,8 @@
 			duty_info.doctor_id,
 			duty_info.max_booknum,
 			duty_info.subject_id,
-			duty_info.duty_date
+			duty_info.duty_date,
+			duty_info.subject_prentId
 			FROM
 			duty_info 
 			<where>
@@ -45,6 +67,49 @@
 			</where>
 		
 	</select>
+	<delete id="deleteDutyInfo" parameterType="DutyInfo">
+	delete from duty_info where duty_id=#{dutyId}
+	
+	</delete>
+	<!-- 添加 -->
+	<insert id="addDutyInfo" parameterType="DutyInfo">
+		insert into duty_info
+		(
+		<trim suffixOverrides="," suffix="">
+			<if test="dutyTime!=null">duty_time,</if>
+			<if test="dutyInterval!=null">duty_interval,</if>
+			<if test="doctorId!=null">doctor_id,</if>
+			<if test="maxBookNum!=null">max_booknum,</if>
+			<if test="dutyDate!=null">duty_date,</if>
+			<if test="subjectId!=null">subject_id,</if>
+			<if test="subjectPrentId!=null">subject_prentId,</if>
+		</trim>
+		)values(
+		<trim suffixOverrides="," suffix="">
+			<if test="dutyTime!=null">#{dutyTime},</if>
+			<if test="dutyInterval!=null">#{dutyInterval},</if>
+			<if test="doctorId!=null">#{doctorId},</if>
+			<if test="maxBookNum!=null">#{maxBookNum},</if>
+			<if test="dutyDate!=null">#{dutyDate},</if>
+			<if test="subjectId!=null">#{subjectId},</if>
+			<if test="subjectPrentId!=null">#{subjectPrentId},</if>
+		</trim>
+		)
+	</insert>
+	<!-- 修改 -->
+	<update id="updateDutyInfo" parameterType="DutyInfo">
+		update duty_info set 
+		<trim suffixOverrides=",">
+			<if test="dutyTime!=null">duty_time=#{dutyTime},</if>
+			<if test="dutyInterval!=null">duty_interval=#{dutyInterval},</if>
+			<if test="doctorId!=null">doctor_id=#{doctorId},</if>
+			<if test="maxBookNum!=null">max_booknum=#{maxBookNum},</if>
+			<if test="dutyDate!=null">duty_date=#{dutyDate},</if>
+			<if test="subjectId!=null">subject_id=#{subjectId},</if>
+			<if test="subjectPrentId!=null">subject_prentId=#{subjectPrentId},</if>
+		</trim>
+		<where>duty_id=#{dutyId}</where>
+	</update>
 </mapper>
 
 

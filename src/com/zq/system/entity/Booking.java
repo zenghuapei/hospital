@@ -48,6 +48,11 @@ public class Booking {
 	 * 地址
 	 */
 	private String bookAddress;
+	/**
+	 * 排位号
+	 */
+	private Integer bookXuhao;
+	private Date dutyDate;
 	public Integer getBookingId() {
 		return bookingId;
 	}
@@ -103,6 +108,18 @@ public class Booking {
 	}
 	public void setBookAddress(String bookAddress) {
 		this.bookAddress = bookAddress;
+	}
+	public Integer getBookXuhao() {
+		return bookXuhao;
+	}
+	public void setBookXuhao(Integer bookXuhao) {
+		this.bookXuhao = bookXuhao;
+	}
+	public Date getDutyDate() {
+		return dutyDate;
+	}
+	public void setDutyDate(Date dutyDate) {
+		this.dutyDate = dutyDate;
 	}
 	
 }

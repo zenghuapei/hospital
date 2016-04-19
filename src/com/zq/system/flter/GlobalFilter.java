@@ -40,7 +40,7 @@ public class GlobalFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse)servletResponse;
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute(CommonConstants.SEESION_MEMBER) == null) {
+		if(session.getAttribute(CommonConstants.SEESION_MEMBER) == null && session.getAttribute(CommonConstants.SEESION_MEMBER_ADMIN)==null) {
 			response.sendRedirect(request.getContextPath()   +"/login1.jsp");
 			return;
 		}

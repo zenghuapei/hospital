@@ -57,6 +57,29 @@
 			FROM
 			doctor_info where doctor_id=#{doctorId}
 	</select>
+	<select id="getDoctorInfo" resultMap="doctorInfo" parameterType="DoctorInfo">
+		SELECT
+			doctor_info.doctor_id,
+			doctor_info.doctor_brief,
+			doctor_info.doctor_code,
+			doctor_info.doctor_name,
+			doctor_info.doctor_pic,
+			doctor_info.doctor_post,
+			doctor_info.doctor_sex,
+			doctor_info.doctor_specialty,
+			doctor_info.doctor_type,
+			doctor_info.doctor_xl,
+			doctor_info.doctor_years,
+			doctor_info.email,
+			doctor_info.subject_id
+			FROM
+			doctor_info 
+			 <where>
+				<if test="doctorId !=null and doctorId !=''">
+					doctor_info.doctor_id =#{doctorId}
+				</if>
+			</where>  
+	</select>
 	<!-- 添加 -->
 	<insert id="addDoctorInfo" parameterType="DoctorInfo">
 		insert into doctor_info
@@ -96,24 +119,71 @@
 	<update id="updateDoctorInfo" parameterType="DoctorInfo">
 		update doctor_info set 
 		<trim suffixOverrides=",">
-			<if test="doctorBrief!=null">doctor_brief=#{doctorBrief}</if>
-			<if test="doctorCode!=null">doctor_code=#{doctorCode}</if>
-			<if test="doctorName!=null">doctor_name=#{doctorName}</if>
-			<if test="doctorPic!=null">doctor_pic=#{doctorPic}</if>
-			<if test="doctorPost!=null">doctor_post=#{doctorPost}</if>
-			<if test="doctorSex!=null">doctor_sex=#{doctorSex}</if>
-			<if test="doctorSpecialty!=null">doctor_specialty=#{doctorSpecialty}</if>
-			<if test="doctorType!=null">doctor_type=#{doctorType}</if>
-			<if test="doctorXl!=null">doctor_xl=#{doctorXl}</if>
-			<if test="doctorYears!=null">doctor_years=#{doctorYears}</if>
-			<if test="email!=null">email=#{email}</if>
-			<if test="subjectId!=null">subject_id=#{subjectId}</if>
+			<if test="doctorBrief!=null and doctorBrief!=''">
+				doctor_brief=#{doctorBrief},
+			</if>
+			<if test="doctorCode!=null and doctorCode!=''">
+				doctor_code=#{doctorCode},
+			</if>
+			<if test="doctorName!=null and doctorName!=''">
+				doctor_name=#{doctorName},
+			</if>
+			<if test="doctorPic!=null and doctorPic!=''">
+				doctor_pic=#{doctorPic},
+			</if>
+			<if test="doctorPost!=null and doctorPost!=''">
+				doctor_post=#{doctorPost},
+			</if>
+			<if test="doctorSex!=null and doctorSex!=''">
+				doctor_sex=#{doctorSex},
+			</if>
+			<if test="doctorSpecialty!=null and doctorSpecialty!=''">
+				doctor_specialty=#{doctorSpecialty},
+			</if>
+			<if test="doctorType!=null and doctorType!=''">
+				doctor_type=#{doctorType},
+			</if>
+			<if test="doctorXl!=null and doctorXl!=''">
+				doctor_xl=#{doctorXl},
+			</if>
+			<if test="doctorYears!=null and doctorYears!=''">
+				doctor_years=#{doctorYears},
+			</if>
+			<if test="email!=null and email!=''">
+				email=#{email},
+			</if>
+			<if test="subjectId!=null and subjectId!=''">
+				subject_id=#{subjectId}
+			</if>
 		</trim>
 		<where>doctor_id=#{doctorId}</where>
 	</update>
 	<delete id="deleteDoctorInfo" parameterType="DoctorInfo">
 		delete from doctor_info where doctor_id=#{doctorId}
 	</delete>
+	<select id="getPageDoctorInfo" resultMap="doctorInfo" parameterType="Page">
+			select
+			doctor_info.doctor_id,
+			doctor_info.doctor_brief,
+			doctor_info.doctor_code,
+			doctor_info.doctor_name,
+			doctor_info.doctor_pic,
+			doctor_info.doctor_post,
+			doctor_info.doctor_sex,
+			doctor_info.doctor_specialty,
+			doctor_info.doctor_type,
+			doctor_info.doctor_xl,
+			doctor_info.doctor_years,
+			doctor_info.email,
+			doctor_info.subject_id
+			FROM
+			doctor_info doctor_info
+		    <where>
+				<if test="params.doctorName !=null and params.doctorName !=''">
+					doctor_info.doctor_name like concat('%',#{params.doctorName},'%')
+				</if>
+			</where>  
+	</select>
 </mapper>
 
 

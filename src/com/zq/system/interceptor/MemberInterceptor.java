@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zq.system.entity.UserAdmin;
 import com.zq.system.entity.UserInfo;
 import com.zq.system.util.CommonConstants;
  
@@ -53,10 +54,12 @@ public class MemberInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
             Object handler) throws Exception {
     	
-    	/*String requestUrl = request.getRequestURI(); 
+    	String requestUrl = request.getRequestURI(); 
     	if(requestUrl.indexOf(CommonConstants.VERIFYCODE_URL)!=-1){ 
     		return true; 
     	}else if(requestUrl.indexOf(CommonConstants.LOGIN_URL)!=-1){
+    		return true; 
+    	}else if(requestUrl.indexOf(CommonConstants.LOGINADMIN_URL)!=-1){
     		return true; 
     	}else{ 
 
@@ -65,15 +68,18 @@ public class MemberInterceptor implements HandlerInterceptor {
             String  url=request.getServletPath().toString();
             HttpSession session = request.getSession();
             UserInfo user = (UserInfo) session.getAttribute(CommonConstants.SEESION_MEMBER);
+            UserAdmin users = (UserAdmin) session.getAttribute(CommonConstants.SEESION_MEMBER_ADMIN);
             //这里可以根据session的用户来判断角色的权限，根据权限来重定向不同的页面，简单起见，这里只是做了一个重定向
-            if (user==null) {
+            if (user==null && users==null) {
                 //被拦截，重定向到login界面
                 response.sendRedirect(contextPath+"/login1.jsp?redirectURL="
                         + URLEncoder.encode(url));
-                return true;
+                return false;
+            }else{
+            	
+            	return true;
             }
-    	}   */     
-    return true;
+    	}      
     }
  
 }

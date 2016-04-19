@@ -1,7 +1,10 @@
 package com.zq.system.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
+import com.zq.common.page.Page;
 import com.zq.system.entity.UserAdmin;
 
 @Repository
@@ -11,7 +14,7 @@ public interface UserAdminDao {
 	 * @param userId
 	 * @return
 	 */
-	 public UserAdmin getUserAdmin(String account);
+	 public UserAdmin getUserAdmin(UserAdmin userAdmin);
 	
 	/**
 	 * 添加管理员
@@ -31,4 +34,10 @@ public interface UserAdminDao {
 	 * @return
 	 */
 	public Integer deleteUserAdmin(UserAdmin userAdmin);
+	 /**
+	  * 查询分页信息
+	 * @param page
+	 * @return
+	 */
+	public List<UserAdmin> getPageUserAdmin(Page page);
 }

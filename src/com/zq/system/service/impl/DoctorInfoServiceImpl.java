@@ -7,15 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.zq.common.page.Page;
 import com.zq.system.dao.DoctorInfoDao;
-import com.zq.system.dao.MenuDao;
+import com.zq.system.dao.SubjectDao;
 import com.zq.system.entity.DoctorInfo;
-import com.zq.system.entity.Menu;
+import com.zq.system.entity.Subject;
 import com.zq.system.service.DoctorInfoService;
-import com.zq.system.service.MenuService;
 @Service("doctorInfoService")
 public class DoctorInfoServiceImpl implements DoctorInfoService {
 	@Autowired
 	private DoctorInfoDao doctorInfoDao;
+	@Autowired
+	private SubjectDao subjectDao;
 
 	public List<DoctorInfo> getDoctorInfoList(DoctorInfo doctorInfo) {
 		
@@ -23,18 +24,32 @@ public class DoctorInfoServiceImpl implements DoctorInfoService {
 	}
 
 	public Integer addDoctorInfo(DoctorInfo doctorInfo) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return doctorInfoDao.addDoctorInfo(doctorInfo);
 	}
 
 	public void updateDoctorInfo(DoctorInfo doctorInfo) {
-		// TODO Auto-generated method stub
+		doctorInfoDao.updateDoctorInfo(doctorInfo);
 		
 	}
 
 	public void deleteDoctorInfo(DoctorInfo doctorInfo) {
-		// TODO Auto-generated method stub
+		doctorInfoDao.deleteDoctorInfo(doctorInfo);
 		
+	}
+
+	public List<DoctorInfo> getPageDoctorInfo(Page page) {
+		
+		return doctorInfoDao.getPageDoctorInfo(page);
+	}
+
+	public DoctorInfo getDoctorInfo(DoctorInfo doctorInfo) {
+		DoctorInfo doctor =doctorInfoDao.getDoctorInfo(doctorInfo);
+		Subject subject = new Subject();
+		subject.setSubjectId(doctor.getSubjectId());
+		Subject subj = subjectDao.getSubject(subject);
+		doctor.setSubjectPrentId(subj.getParentId());
+		return doctor;
 	}
 
 	

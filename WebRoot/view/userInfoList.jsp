@@ -17,132 +17,73 @@
 	<body>
    
     
-<div class="mini-splitter" style="width:100%;height:100%;">
-    <div size="240" showCollapseButton="true">
-        <div class="mini-toolbar" style="padding:2px;border-top:0;border-left:0;border-right:0;">                
-            <span style="padding-left:5px;">名称：</span>
-            <input class="mini-textbox" />
-            <a class="mini-button" iconCls="icon-search" plain="true">查找</a>                  
-        </div>
-        <div class="mini-fit">
-            <ul id="departmentTree" class="mini-tree" url="${pageContext.request.contextPath}/department/getDepartmentListUser.do?userId=${sessionScope.currentUser.userId}"  style="width:100%;"
-                showTreeIcon="true" textField="departmentName" idField="departmentId" parentField="parentId" resultAsTree="false"
-                
-            >        
-            </ul>
-        </div>
-        
+ <div class="mini-toolbar" style="padding:2px;border-bottom:0;">
+        <table style="width:100%;">
+            <tr>
+            <td style="white-space:nowrap;"><label style="font-family:Verdana;">昵称: </label>
+                 <input id="userName" class="mini-textbox" emptyText="请输入昵称" style="width:150px;" onenter="onKeyEnter"/> 
+                <a class="mini-button" iconCls="icon-search" plain="true" onclick="onSearch()">查询</a>
+                </td>
+            </tr>
+        </table>
     </div>
-    <div showCollapseButton="true">
-        <div class="mini-toolbar" style="padding:2px;border-top:0;border-left:0;border-right:0;">                            
-          <table style="width:100%;">
-                <tr>
-                    <td style="width:100%;">
-                        <a class="mini-button" iconCls="icon-add" onclick="add()">增加</a>
-                        <a class="mini-button" iconCls="icon-add" onclick="edit()">编辑</a>
-                        <a class="mini-button" iconCls="icon-remove" onclick="remove()">删除</a>       
-                    </td>
-                    <td style="white-space:nowrap;">
-                        <input id="key" class="mini-textbox" emptyText="请输入部门名称" style="width:150px;" onenter="onKeyEnter"/>   
-                        <a class="mini-button" onclick="search()">查询</a>
-                    </td>
-                </tr>
-            </table>                     
-        </div>
-        <div class="mini-fit" >
-            <div id="grid1" class="mini-datagrid" style="width:100%;height:100%;" 
-                borderStyle="border:0;"
-                url="${pageContext.request.contextPath}/userInfo/queryPage.do" multiSelect="true" allowResize="true"
-                showFilterRow="true" allowCellSelect="true" allowCellEdit="true"                
-            >
-                <div property="columns">  
-                	<div type="checkcolumn" ></div>           
-                    <div field="userName" width="120"  align="center" headerAlign="center" allowSort="true">姓名
+    <!--撑满页面-->
+    <div class="mini-fit" >
+        
+        <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;" 
+            url="${pageContext.request.contextPath}/userInfo/queryPage.do"  idField="userId"
+            sizeList="[5,10,20,50]" pageSize="10"
+        >
+            <div property="columns">  
+                	
+                    <div field="userName" width="120"  align="center" headerAlign="center" >昵称
                     </div>      
-                    <div field="userEmail" width="120"  align="center" headerAlign="center" allowSort="true">E-mail                        
-                        <input id="nameFilter" property="filter" class="mini-textbox" onvaluechanged="onNameFilterChanged" style="width:100%;" />
+                    <div field="accout" width="120"  align="center" headerAlign="center" >用户账号                        
                     </div>                
-                    <div field="userSex" width="100" allowSort="true" renderer="onGenderRenderer" align="center" headerAlign="center">性别
+                    <div field="sex" width="100"  renderer="onGenderRenderer" align="center" headerAlign="center">性别
                     </div>            
-                    <div field="userRecruitment"  align="center" width="100" allowSort="true">籍贯
+                    <div field="idCard"  align="center" width="100" >身份证号
                     </div>
-                    <div field="userNewaddress"  align="center" width="100" allowSort="true" dateFormat="yyyy-MM-dd">现居住地址
+                    <div field="address"  align="center" width="100" >现居住地址
                     </div>                                    
-                    <div field="userNumber" width="100"  align="center" headerAlign="center" dateFormat="yyyy-MM-dd" allowSort="true">联系电话</div>                
+                    <div field="relationway" width="100"  align="center" headerAlign="center"  >联系电话</div>  
+                    <div field="userRegister"  align="center" width="100"  dateFormat="yyyy-MM-dd">注册时间</div>    
+                     <div name="action" width="120" headerAlign="center" align="center" renderer="onActionRenderer" cellStyle="padding:0;">操作</div>                 
                 </div>
-            </div>  
-        </div>
-    </div>        
-</div>
-    <input  type="hidden" id="departmentId"/>
+        </div> 
+
+    </div>
     <script type="text/javascript">
         mini.parse();
+        var grid = mini.get("datagrid1");
+        grid.load();
 
-        var tree = mini.get("departmentTree");
-        var grid = mini.get("grid1");
-
-        tree.on("nodeselect", function (e) {
-        
-            if (e.isLeaf) {
-                grid.load({ departmentId: e.node.departmentId });
-                $("#departmentId").val(e.node.departmentId);
-            } else {
-               grid.load({ departmentId: e.node.departmentId });
-               $("#departmentId").val(e.node.departmentId);
-            }
-        });
-        //////////////////////////////////////////////
-        var Genders = [{ id: 1, text: '男' }, { id: 2, text: '女'}];
-        function onGenderRenderer(e) {
-            for (var i = 0, l = Genders.length; i < l; i++) {
-                var g = Genders[i];
-                if (g.id == e.value) return g.text;
-            }
-            return "";
+        function onSearch() {
+            var key = mini.get("userName").getValue();
+            grid.load({ userName: key });
         }
-        
-        function onNameFilterChanged(e) {
-            var textbox = e.sender;
-            var key = textbox.getValue();
-            
-            var node = tree.getSelectedNode();
-            if (node) {
-                grid.load({ dept_id: node.id, key: key });
-            }
-        }
-         function add() {
-            
-            mini.open({
-                url: "${pageContext.request.contextPath}/view/userInfoeditadd.jsp",
-                title: "新增用户", width: 600, height: 360,                
-                onload: function () {
-                    var iframe = this.getIFrameEl();
-                    var departmentId = $("#departmentId").val();
-                    var data = { action: "add",departmentId:departmentId};
-                    iframe.contentWindow.SetData(data);
-                },
-                ondestroy: function (action) {
+         function onActionRenderer(e) {
+            var grid = e.sender;
+            var record = e.record;
+            var uid = record.userId;
+            var rowIndex = e.rowIndex;
 
-                    grid.reload();
+            var s =  '<a class="Delete_Button" href="javascript:delRow(\'' + uid + '\')">删除</a>';
+                       
+            return s;
+        }
+        function delRow(row_uid) {
+                if (confirm("确定删除此记录？")) {
+                    grid.loading("删除中，请稍后......");
+                    $.ajax({
+                        url: '${pageContext.request.contextPath}/userInfo/deleteUserInfo.do?userId=' + row_uid,
+                        success: function (text) {
+                            grid.reload();
+                        },
+                        error: function () {
+                        }
+                    });
                 }
-            });
-        }
-       
-        function saveData() {
-            var data = grid.getChanges();
-            var json = mini.encode(data);
-            grid.loading("保存中，请稍后......");
-            $.ajax({
-                url: "../data/AjaxService.aspx?method=SaveEmployees",
-                data: { data: json },
-                type: "post",
-                success: function (text) {
-                    grid.reload();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert(jqXHR.responseText);
-                }
-            });
         }
     </script>
 

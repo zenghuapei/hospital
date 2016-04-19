@@ -24,9 +24,9 @@
     </style>
 </head>
 <body>    
-     
-    <form id="department" method="post">
-        <input name="id" class="mini-hidden" />      
+    <input id="tag" class="mini-hidden" value=""/>
+    <form id="doctorInfo" method="post">
+        <input name="doctorId" class="mini-hidden" />      
         <fieldset style="border:solid 1px #aaa;padding:3px;">
             <legend >基本信息</legend>
             <div style="padding:5px;">
@@ -34,93 +34,70 @@
             <tr>
                 <td style="width:70px;">姓名:</td>
                 <td style="width:150px;">    
-                    <input name="userName" id="t_userName" class="mini-textbox" required="true"/>
+                    <input name="doctorName" id="t_doctorName" class="mini-textbox" required="true"/>
                 </td>
                 <td style="width:70px;">性别：</td>
                 <td >                        
-                    <select name="userSex" id="t_userSex" class="mini-radiobuttonlist">
-                        <option value="1">男</option>
-                        <option value="2">女</option>
+                    <select name="doctorSex" id="t_doctorSex" class="mini-radiobuttonlist">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
                     </select>
                 </td>
                 
             </tr>
-            <tr>
-                 <td style="width:70px;">联系电话:</td>
-                <td style="width:150px;">    
-                    <input name="userNumber" id="t_userNumber" class="mini-textbox" required="true"/>
-                </td>
-                <td >出生日期：</td>
-                <td >    
-                    <input name="userBirthday" id="t_userBirthday" class="mini-datepicker" required="true" emptyText="请选择日期"/>
-                </td>
-            </tr>
+           
              <tr>
-                  <td >籍贯：</td>
+                  <td >专业名称：</td>
                   <td >    
-                      <input name="userRecruitment" id="t_userRecruitment" class="mini-textbox" required="true"/>
+                      <input name="doctorSpecialty" id="t_doctorSpecialty" class="mini-textbox" required="true"/>
                   </td>
-                  <td >现地址：</td>
+                  <td >医生类别：</td>
                   <td >    
-                      <input name="userNewaddress" id="t_userNewaddress" class="mini-textbox" required="true" valueField="id" textField="name"/>
+                      <input name="doctorType" id="t_doctorType" class="mini-textbox" required="true" valueField="id" textField="name"/>
                   </td>
             </tr>
                
             <tr>
                 <td >学历：</td>
                 <td >    
-                    <input name="userEducation" id="t_userEducation" class="mini-textbox" valueField="id" textField="name" url="" />
+                    <input name="doctorXl" id="t_doctorXl" class="mini-textbox" valueField="id" textField="name" url="" />
                 </td>
-                <td >状态：</td>
+                <td >从医年数：</td>
                 <td >    
-                    <input name="userState" id="t_userState" class="mini-textbox" />
+                    <input name="doctorYears" id="t_doctorYears" class="mini-textbox" />
                 </td>
             </tr>           
             <tr>
+                <td >科室类型:</td>
+                <td >    
+                   <input name="subjectPrentId" id="t_subjectPrentId" onvaluechanged="onDeptChanged" class="mini-combobox" url="${pageContext.request.contextPath}/subject/querySubjectSelect.do" textField="subjectName" valueField="subjectId" required="true" showNullItem="true"/>
+                </td>
+                <td >科室：</td>
+                <td >    
+                    <input name="subjectId" id="t_subjectId" class="mini-combobox"  textField="subjectName" valueField="subjectId" textField="text" valueField="id" required="true"/>
+                </td>
+            </tr>
+             <tr>
+                 <td style="width:70px;">职称:</td>
+                <td style="width:150px;">    
+                    <input name="doctorPost" id="t_doctorPost" class="mini-textbox" required="true"/>
+                </td>
                 <td >E-mail:</td>
                 <td >    
-                    <input name="userEmail" id="t_userEmail" class="mini-textbox" required="true"/>
-                </td>
-                <td >注册时间：</td>
-                <td >    
-                    <input name="userRegister" id="t_userRegister" class="mini-datepicker" required="true" emptyText="请选择日期"/>
+                    <input name="email" id="t_email" class="mini-textbox" required="true"/>
                 </td>
             </tr>
              <tr>
                
-                 <td style="width:100px;">紧急联系电话:</td>
-                <td style="width:150px;">    
-                    <input name="userUrgentnumber" id="t_userUrgentnumber" class="mini-textbox" required="true"/>
+                 <td style="width:100px;">简介:</td>
+                <td style="width:150px;" colspan="3">    
+                    <input name="doctorBrief" id="t_doctorBrief" style="width: 400px" class="mini-textarea" required="true"/>
                 </td>
                
             </tr>
         </table>            
             </div>
         </fieldset>
-        
-          <fieldset style="border:solid 1px #aaa;padding:3px;">
-            <legend >账号信息</legend>
-            <div style="padding:5px;">
-            
-            <div style="padding-left:11px;padding-bottom:5px;">
-            <table style="table-layout:fixed;">
-                <tr>
-                    <td style="width:90px;">账号：</td>
-                    <td style="width:150px;">    
-                        <input name="account.account" id="t_account" class="mini-textbox" required="true"  emptyText="请输入帐号"/>
-                    </td>
-                    <td style="width:70px;">密码：</td>
-                    <td style="width:150px;">    
-                        <input name="account.passWord" id="t_passWord" class="mini-textbox" />
-                    </td>
-                </tr>
-               
-            </table>
-        </div>
-            
-            </fieldset>
-        
-
         <div style="text-align:center;padding:10px;">               
             <a class="mini-button" onclick="onOk" style="width:60px;margin-right:20px;">确定</a>       
             <a class="mini-button" onclick="onCancel" style="width:60px;">取消</a>       
@@ -128,9 +105,22 @@
     </form>
     <script type="text/javascript">
         mini.parse();
+ 
 
-        var form = new mini.Form("department");
+        var form = new mini.Form("doctorInfo");
+ 		var subjectPrentId = mini.get("t_subjectPrentId");
+        var subjectId = mini.get("t_subjectId");
 
+        function onDeptChanged(e) {
+            var id = subjectPrentId.getValue();
+
+            subjectId.setValue("");
+            
+            var url = "${pageContext.request.contextPath}/subject/querySubjectSubset.do?parentId=" + id
+            subjectId.load(url);
+            
+            subjectId.setValue("");
+        }
         function SaveData() {
             var o = form.getData();            
 
@@ -141,12 +131,12 @@
 			//var params1 = {data:$.toJSON(params)}; 
             var json = mini.encode(o);
             $.ajax({
-                url: "${pageContext.request.contextPath}/userInfo/addUserInfo.do",
+                url: "${pageContext.request.contextPath}/doctorInfo/addDoctorInfo.do",
 				type: 'post',
                 data: {data:json},
                 cache: false,
                 success: function (text) {
-                    //CloseWindow("save");
+                    CloseWindow("add");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert(jqXHR.responseText);
@@ -154,24 +144,47 @@
                 }
             });
         }
+ 		function EditData() {
+            var o = form.getData();            
 
+            form.validate();
+            if (form.isValid() == false) return;
+
+           // var params = getSubmitParams("[id^='t_']");
+			//var params1 = {data:$.toJSON(params)}; 
+            var json = mini.encode(o);
+            $.ajax({
+                url: "${pageContext.request.contextPath}/doctorInfo/updateDoctorInfo.do",
+				type: 'post',
+                data: {data:json},
+                cache: false,
+                success: function (text) {
+                    CloseWindow("edit");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert(jqXHR.responseText);
+                    CloseWindow();
+                }
+            });
+        }
         ////////////////////
         //标准方法接口定义
         function SetData(data) {
+        $("#tag").val(data.action);
             if (data.action == "edit") {
                 //跨页面传递的数据对象，克隆后才可以安全使用
                 data = mini.clone(data);
 
                 $.ajax({
-                    url: "../data/AjaxService.jsp?method=GetEmployee&id=" + data.id,
+                    url: "${pageContext.request.contextPath}/doctorInfo/queryDoctor.do?doctorId=" + data.doctorId,
                     cache: false,
                     success: function (text) {
                         var o = mini.decode(text);
                         form.setData(o);
                         form.setChanged(false);
-
                         onDeptChanged();
-                        mini.getbyName("position").setValue(o.position);
+                        // mini.getbyName("subjectPrentId").setValue(o.subjectPrentId);
+                        mini.getbyName("subjectId").setValue(o.subjectId);
                     }
                 });
             }
@@ -191,23 +204,15 @@
             else window.close();            
         }
         function onOk(e) {
-            SaveData();
+        	if($("#tag").val()=="add"){
+	            SaveData();
+        	}else if($("#tag").val()=="edit"){
+				EditData();
+			}	
         }
         function onCancel(e) {
             CloseWindow("cancel");
         }
-        //////////////////////////////////
-        function onDeptChanged(e) {
-            var deptCombo = mini.getbyName("dept_id");
-            var positionCombo = mini.getbyName("position");
-            var dept_id = deptCombo.getValue();
-
-            positionCombo.load("../data/AjaxService.jsp?method=GetPositionsByDepartmenId&id=" + dept_id);
-            positionCombo.setValue("");
-        }
-
-
-
     </script>
 </body>
 </html>

@@ -29,4 +29,16 @@ public interface DoctorInfoService {
 		 * @param doctorInfo
 		 */
 		public void deleteDoctorInfo(DoctorInfo doctorInfo);
+		 /**
+		  * 查询分页信息
+		 * @param page
+		 * @return
+		 */
+		public List<DoctorInfo> getPageDoctorInfo(Page page);
+		 /**
+		  * 查询单条医生信息
+		 * @param page
+		 * @return
+		 */
+		public DoctorInfo getDoctorInfo(DoctorInfo doctorInfo);
 }
