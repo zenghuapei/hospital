@@ -61,7 +61,7 @@
             //var json = mini.encode(o);
             if(isverify()){
 	            $.ajax({
-	                url: "./userInfo/addUserInfo.do",
+	                url: '${pageContext.request.contextPath}/userInfo/addUserInfo.do',
 					type: 'post',
 	                data: params1,
 	                cache: false,

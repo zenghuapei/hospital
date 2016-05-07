@@ -61,6 +61,8 @@ public class MemberInterceptor implements HandlerInterceptor {
     		return true; 
     	}else if(requestUrl.indexOf(CommonConstants.LOGINADMIN_URL)!=-1){
     		return true; 
+    	}else if(requestUrl.indexOf(CommonConstants.REGISTER_URL)!=-1){
+    		return true;
     	}else{ 
 
     		//请求的路径
